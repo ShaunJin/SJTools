@@ -18,5 +18,7 @@
 /** 错误提示 */
 +(void)errorWithMessage:(NSString *)message;
 /** 创建弹窗 */
++(void)alertWithTitle:(NSString *)title message:(NSString *)message leftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle leftBlock:(dispatch_block_t)leftBlock rightBlock:(dispatch_block_t)rightBlock;
+/** 创建弹窗 */
 +(void)makeAlertWithTitle:(NSString *)title message:(NSString *)message blockList:(NSArray *)blockList titleList:(NSArray *)titleList;
 @end

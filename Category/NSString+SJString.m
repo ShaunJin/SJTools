@@ -9,6 +9,10 @@
 #import "NSString+SJString.h"
 #import <CoreText/CoreText.h>
 @implementation NSString (SJString)
+/** 自动补全 */
+NSString * ifNull(NSString *text){
+    return (text.length > 0) ? text : @"";
+}
 /** 字典或数组转换成字符串 */
 +(NSString *)stringWithJsonData:(id)data{
     NSError *error;

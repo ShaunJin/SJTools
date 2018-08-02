@@ -8,15 +8,11 @@
 
 #import "UILabel+SJLabel.h"
 @implementation UILabel (SJLabel)
-+(instancetype)labelWithFrame:(CGRect)frame text:(NSString *)text textColor:(UIColor *)color fontSize:(CGFloat)size{
-    UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.text = text;
-    if (color) {
-        label.textColor = color;
-    }
-    if (size > 0) {
-        label.font = [UIFont systemFontOfSize:size];
-    }
+/** 创建label */
++(instancetype)labelWithTextColor:(UIColor *)textColor size:(CGFloat)size{
+    UILabel *label = [[UILabel alloc] init];
+    label.textColor = textColor;
+    label.font = [UIFont systemFontOfSize:size];
     return label;
 }
 @end

@@ -12,20 +12,24 @@
 
 @end
 @implementation UIButton (SJButton)
-
-+(instancetype)buttonWithType:(UIButtonType)buttonType title:(NSString *)title image:(UIImage *)image backgroundImage:(UIImage *)backImage target:(id)target action:(SEL)action{
-    UIButton *button = [UIButton buttonWithType:buttonType];
-    if (title.length > 0) {
-        [button setTitle:title forState:UIControlStateNormal];
+/** 使用文字创建button */
++(instancetype)buttonWithTitle:(NSString *)title color:(UIColor *)color size:(CGFloat)size target:(id)target action:(SEL)action{
+    UIButton *button = [UIButton buttonWithType:0];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:color forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
+    if ([target respondsToSelector:action]) {
+        [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     }
-    if (image) {
-        [button setImage:image forState:UIControlStateNormal];
-    }
-    if (backImage) {
-        [button setBackgroundImage:backImage forState:UIControlStateNormal];
-    }
-    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
-
+/** 使用图片创建button */
++(instancetype)buttonWithImage:(UIImage *)image target:(id)target action:(SEL)action{
+    UIButton *button = [UIButton buttonWithType:0];
+    [button setImage:image forState:UIControlStateNormal];
+    if ([target respondsToSelector:action]) {
+        [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    }
+    return button;
+}
 @end

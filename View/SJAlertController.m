@@ -25,6 +25,16 @@
     [self alertWithTitle:@"错误" message:message];
 }
 /** 创建弹窗 */
++(void)alertWithTitle:(NSString *)title message:(NSString *)message leftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle leftBlock:(dispatch_block_t)leftBlock rightBlock:(dispatch_block_t)rightBlock{
+    if (![self isBlock:leftBlock]) {
+        leftBlock = ^(){};
+    }
+    if (![self isBlock:rightBlock]) {
+        rightBlock = ^(){};
+    }
+    [self makeAlertWithTitle:title message:message blockList:@[leftBlock,rightBlock] titleList:@[ifNull(leftTitle),ifNull(rightTitle)]];
+}
+/** 创建弹窗 */
 +(void)makeAlertWithTitle:(NSString *)title message:(NSString *)message blockList:(NSArray *)blockList titleList:(NSArray *)titleList{
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     for (int i = 0; i < titleList.count; i++) {

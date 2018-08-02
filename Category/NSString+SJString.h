@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface NSString (SJString)
+/** 字符串不存在替换成@“” */
+NSString * ifNull(NSString *text);
 /**
  将文字按行分割成字符串
  

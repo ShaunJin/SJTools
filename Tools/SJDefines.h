@@ -33,13 +33,14 @@
 /** 16进制数值颜色 */ // 调用 ：HEXRGB(0XFFFFFF)
 #define HEXRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 /** 随机颜色 */
-#define RandColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
+#define RandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
 
 /** keyWindow */
 #define kMainWindow  [UIApplication sharedApplication].keyWindow
 /** 根视图 */
 #define kRootViewController [UIApplication sharedApplication].keyWindow.rootViewController
-
+/** 快速声明block */
+#define kBlock(block)               dispatch_block_t block = ^(){}
 /** WeakSelf */
 #define kWeakSelf __weak typeof(self) weakSelf = self;
 

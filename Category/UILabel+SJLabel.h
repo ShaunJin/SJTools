@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UILabel (SJLabel)
-
+/** 创建label */
++(instancetype)labelWithTextColor:(UIColor *)textColor size:(CGFloat)size;
 @end

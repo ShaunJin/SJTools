@@ -21,4 +21,6 @@
 #import "NSObject+SJObject.h"
 #import "SJBaseViewController.h"
 #import "SJNavigationController.h"
+#import "UILabel+SJLabel.h"
+#import "UITextField+SJTextField.h"
 #endif /* SJCommonTools_h */

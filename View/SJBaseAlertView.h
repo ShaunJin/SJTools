@@ -29,20 +29,4 @@ typedef enum : NSUInteger {
 /** 消失 */
 -(void)dismiss;
 
-
-
-/*
- ---------------------------
- 丨        title           丨
- 丨       message          丨
- 丨                        丨
- 丨leftTitle    rightTtitle丨
- 丨                        丨
- ---------------------------
- */
-/** 通用弹窗 可以设置颜色 */
-+(void)tipsWithTitle:(NSString *)title message:(NSString *)message leftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle buttonColor:(UIColor *)buttonColor leftBlock:(dispatch_block_t)leftBlock rightBlock:(dispatch_block_t)rightBlock;
-
-/** 通用弹窗 无颜色 */
-+(void)tipsWithTitle:(NSString *)title message:(NSString *)message leftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle leleftBlock:(dispatch_block_t)leftBlock rightBlock:(dispatch_block_t)rightBlock;
 @end
