@@ -14,7 +14,7 @@
 @implementation UIButton (SJButton)
 /** 使用文字创建button */
 +(instancetype)buttonWithTitle:(NSString *)title color:(UIColor *)color size:(CGFloat)size target:(id)target action:(SEL)action{
-    UIButton *button = [UIButton buttonWithType:0];
+    UIButton *button = [[self class] buttonWithType:0];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:color forState:UIControlStateNormal];
     [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
@@ -25,7 +25,7 @@
 }
 /** 使用图片创建button */
 +(instancetype)buttonWithImage:(UIImage *)image target:(id)target action:(SEL)action{
-    UIButton *button = [UIButton buttonWithType:0];
+    UIButton *button = [[self class] buttonWithType:0];
     [button setImage:image forState:UIControlStateNormal];
     if ([target respondsToSelector:action]) {
         [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
