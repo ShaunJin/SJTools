@@ -196,4 +196,20 @@ NSString * ifNull(NSString *text){
 #pragma clang diagnostic pop
     return encodedString;
 }
+/** 判定是否是手机号 */
+-(BOOL)isPhoneNumber{
+    NSString *pattern = @"^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0678])\\d{8}$";
+    return [self isMatchWithPattern:pattern];
+}
+/** 身份证号验证(粗略验证) */
+-(BOOL)isIdNmuber{
+    NSString *pattern = @"(^[0-9]{15}$)|([0-9]{17}([0-9]|X)$)";
+    return [self isMatchWithPattern:pattern];
+}
+/** 判断自身是否符合正则 */
+-(BOOL)isMatchWithPattern:(NSString *)pattern{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:self];
+    return isMatch;
+}
 @end
