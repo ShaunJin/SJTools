@@ -36,14 +36,18 @@
 }
 /** 在主线程执行的任务 */
 +(void)actionWithMainQueue:(void (^)(void))action{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        action();
-    });
+    if (action) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            action();
+        });
+    }
 }
 /** 在多线程执行的任务 */
 +(void)actionWithGlobalQueue:(void(^)(void))action{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        action();
-    });
+    if (action) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            action();
+        });
+    }
 }
 @end

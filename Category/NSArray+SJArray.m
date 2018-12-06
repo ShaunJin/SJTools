@@ -7,7 +7,7 @@
 //
 // 数组的扩展
 #import "NSArray+SJArray.h"
-
+#import "NSDictionary+SJDictionary.h"
 @implementation NSArray (SJArray)
 /** json字符串转换成数组 */
 +(NSArray *)arrayWithJsonString:(NSString *)jsonString{
@@ -23,4 +23,5 @@
     }
     return nil;
 }
+
 @end

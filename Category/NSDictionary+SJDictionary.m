@@ -7,7 +7,7 @@
 //
 // 字典的扩展
 #import "NSDictionary+SJDictionary.h"
-
+#import "NSArray+SJArray.h"
 @implementation NSDictionary (SJDictionary)
 /** json字符串转换成字典 */
 +(NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString{
