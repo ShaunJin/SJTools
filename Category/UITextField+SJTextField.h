@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol SJTextFieldDelegate <UITextFieldDelegate>
+@optional
+- (void)textFieldDidDeleteBackward:(UITextField *)textField;
+@end
 @interface UITextField (SJTextField)
+
+@property (weak, nonatomic) id<SJTextFieldDelegate> delegate;
+/**
+ *  监听删除按钮
+ *  object:UITextField
+ */
+extern NSString * const SJTextFieldDidDeleteBackwardNotification;
 /** 创建textfield */
 +(instancetype)textFieldWithTextColor:(UIColor *)color size:(CGFloat)size placeholder:(NSString *)placeholder;
 @end
