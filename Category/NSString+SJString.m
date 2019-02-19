@@ -40,11 +40,26 @@ NSString * ifNull(NSString *text){
     // 向上取整
     return ceil(theSize.width);
 }
+-(CGFloat)widthWithFont:(UIFont *)font{
+    CGSize theSize;
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+    theSize = [self sizeWithAttributes:attributes];
+    // 向上取整
+    return ceil(theSize.width);
+}
 /** 计算指定宽度文字高度 */
 -(CGFloat)heightWithWidth:(CGFloat)width size:(int)size{
     CGRect textRect = [self boundingRectWithSize:CGSizeMake(width, MAXFLOAT)
                                          options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                       attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:size]}
+                                         context:nil];
+    return ceil(textRect.size.height);
+}
+/** 计算指定宽度文字高度 */
+-(CGFloat)heightWithWidth:(CGFloat)width font:(UIFont *)font{
+    CGRect textRect = [self boundingRectWithSize:CGSizeMake(width, MAXFLOAT)
+                                         options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                      attributes:@{NSFontAttributeName:font}
                                          context:nil];
     return ceil(textRect.size.height);
 }

@@ -16,9 +16,12 @@ NSString * ifNull(NSString *text);
 /** 字典或数组转换成字符串 */
 +(NSString *)stringWithJsonData:(id)data;
 /** 计算单行文字宽度 */
--(CGFloat)widthWithSize:(int)size;
+-(CGFloat)widthWithSize:(int)size kDeprecated("use -widthWithFont:");
+-(CGFloat)widthWithFont:(UIFont *)font;
 /** 计算指定宽度文字高度 */
--(CGFloat)heightWithWidth:(CGFloat)width size:(int)size;
+-(CGFloat)heightWithWidth:(CGFloat)width size:(int)size kDeprecated("use -heightWithWidth:font");
+/** 计算指定宽度文字高度 */
+-(CGFloat)heightWithWidth:(CGFloat)width font:(UIFont *)font;
 /** 对字符串进行URL编码 */
 -(NSString *)URLEncodedString;
 /** 对字符串进行URL解码 */
