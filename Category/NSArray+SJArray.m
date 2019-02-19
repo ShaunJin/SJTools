@@ -23,5 +23,12 @@
     }
     return nil;
 }
-
+/** 移动数组中数据，拖动cell排序时使用 */
+-(NSArray *)move:(NSInteger)oriIndex to:(NSInteger)toIndex{
+    NSMutableArray *mArray = [self mutableCopy];
+    id object = mArray[oriIndex];
+    [mArray removeObject:object];
+    [mArray insertObject:object atIndex:toIndex];
+    return mArray;
+}
 @end
