@@ -13,4 +13,7 @@
 -(NSString *)base64EncodeWithSafeMode:(BOOL)safeMode;
 /** 镂空纯色图片修改颜色 */
 - (UIImage *)changeColor:(UIColor *)color;
+/** 生成纯色图片 */
++(UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+
 @end

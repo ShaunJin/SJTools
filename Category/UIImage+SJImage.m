@@ -41,5 +41,27 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
-
+/** 生成纯色图片 */
++(UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
++(void)load{
+    Method imageNamed = class_getClassMethod(self, @selector(imageNamed:));
+    Method customImageNamed = class_getClassMethod(self, @selector(customImageNamed:));
+    method_exchangeImplementations(imageNamed, customImageNamed);
+}
++(UIImage *)customImageNamed:(NSString *)name{
+    UIImage *image = [UIImage customImageNamed:name];
+    if (!image) {
+        image = [UIImage imageWithColor:Color(175, 238, 238) size:CGSizeMake(100, 100)];
+    }
+    return image;
+}
 @end
