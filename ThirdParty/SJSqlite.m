@@ -7,7 +7,7 @@
 //
 // Sqlite扩展，需要导入fmdb
 #import "SJSqlite.h"
-#import <FMDB.h>
+#import "FMDB.h"
 @implementation SJSqlite
 
 #pragma mark- Getter

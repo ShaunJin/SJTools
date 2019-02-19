@@ -8,7 +8,8 @@
 
 #ifndef SJDefines_h
 #define SJDefines_h
-
+// 过期提醒
+#define kDeprecated(instead) API_DEPRECATED(instead, macosx(10.2,10.14), ios(2.0,2.0), watchos(2.0,5.0), tvos(9.0,12.0))
 /** 判断字符串是否为空 */
 #define IsEmptyString(str) (([str isKindOfClass:[NSNull class]] || str == nil || [str length]<=0)? YES : NO )
 
@@ -20,10 +21,45 @@
 
 /** 判断系统版本是否大于某（含）版本 */
 #define IsLaterVersion(version) (([[[UIDevice currentDevice] systemVersion] floatValue] >= version)? (YES):(NO))
+#define IOS_VERSION_9_OR_LATER IsLaterVersion(9.0)
+#ifdef IOS_VERSION_9_OR_LATER
 
+#define kRegFont             @"PingFangSC-Regular"
+#define kMedFont             @"PingFangSC-Medium"
+#define kSemFont             @"PingFangSC-Semibold"
+
+#else
+
+#define kRegFont             @"HelveticaNeue-Thin"
+#define kMedFont             @"HelveticaNeue-Medium"
+
+#endif
+/** 判断是否是刘海屏幕 */
+#define kHasSafeArea ({\
+    int tmp = 0;\
+    if (@available(iOS 11.0, *)) {\
+        if (kMainWindow.safeAreaInsets.bottom > 0) {\
+            tmp = 1;\
+        }\
+    }\
+    tmp;\
+})
 /** 屏幕宽高*/
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
+
+#define kScaleWidth(width)      kWidth * width / 375
+#define kScaleHeight(height)    kHeight * height / 667
+
+#define kStasusBarHeight     (kHasSafeArea ? 44.0 : 20.0)   // 状态栏高度
+#define kNaviBarHeight       (kHasSafeArea ? 88.0 : 64.0)   // 导航栏高度（加上状态栏）
+#define kTabBarHeight        (kHasSafeArea ? 83.0 : 49.0)   // tabBard高度（加上底部安全区域的）
+#define kBottomHeight        (kHasSafeArea ? 34.0 : 0.0)    // 底部高度（有安全区域时是安全区域的高度，没有安全区域为0）
+
+#define kHeightNoNaviBar            kHeight - kNaviBarH
+#define kHeightNoNaviBarNoTabBar    kHeight - kNaviBarH - kTabBarH
+
+
 /** 字号 */
 #define kFontSize(size) [UIFont systemFontOfSize:size]
 /** 颜色 */
