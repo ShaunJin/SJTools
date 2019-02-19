@@ -8,11 +8,21 @@
 
 #import "UILabel+SJLabel.h"
 @implementation UILabel (SJLabel)
+-(CGFloat)textWidth{
+    return [self.text widthWithFont:self.font];
+}
+-(void)setTextWidth:(CGFloat)textWidth{
+    // do nothing
+}
+/** 根据text及指定宽度计算高度 */
+-(CGFloat)heightWithWidth:(CGFloat)width{
+    return [self.text heightWithWidth:width font:self.font];
+}
 /** 创建label */
 +(instancetype)labelWithTextColor:(UIColor *)textColor size:(CGFloat)size{
     UILabel *label = [[UILabel alloc] init];
     label.textColor = textColor;
-    label.font = [UIFont systemFontOfSize:size];
+    label.font = [UIFont fontWithName:kMedFont size:size];
     return label;
 }
 @end
