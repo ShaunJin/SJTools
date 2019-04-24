@@ -28,8 +28,6 @@ NSString * ifNull(NSString *text);
 -(NSString *)URLDecodedString;
 /** 根据size计算文件大小 */
 +(NSString *)stringWithSize:(NSInteger)size;
-/** 根据时间戳获取字符串 */
-+(NSString *)stringWithTimeInterval:(NSTimeInterval)timeInterval useDateFormatter:(NSDateFormatter *)dateFormatter;
 /** 时间戳转换时间 */
 -(NSString *)stringWithDataFormatter:(NSString *)dateFormatter;
 /** 时间戳转换成时间(刚刚、几分钟前、几小时前形式) */

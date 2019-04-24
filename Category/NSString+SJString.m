@@ -84,15 +84,7 @@ NSString * ifNull(NSString *text){
     }
     return nil;
 }
-/** 根据时间戳获取字符串 */
-+(NSString *)stringWithTimeInterval:(NSTimeInterval)timeInterval useDateFormatter:(NSDateFormatter *)dateFormatter{
-    if (!dateFormatter) {
-        dateFormatter = [NSDateFormatter new];
-        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
-    }
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    return [dateFormatter stringFromDate:date];
-}
+
 /** 时间戳转换时间 */
 -(NSString *)stringWithDataFormatter:(NSString *)dateFormatter{
     NSDateFormatter *formatter = [NSDateFormatter new];
