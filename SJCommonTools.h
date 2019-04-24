@@ -27,4 +27,5 @@
 #import "UINavigationController+SJNavigationController.h"
 #import "UIViewController+SJViewController.h"
 #import "UIColor+SJColor.h"
+#import "NSDate+SJDate.h"
 #endif /* SJCommonTools_h */
