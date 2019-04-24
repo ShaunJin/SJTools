@@ -19,6 +19,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }
+    self.timeCount = self.seconds + 1;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTitle) userInfo:nil repeats:YES];
     [self updateTitle]; // 立即执行一次
 }
@@ -28,30 +29,33 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    self.timeCount = 0;
-    [self updateTitle];
+    [self updateTitleWith:0];
 }
 -(void)updateTitle{
     self.timeCount = self.timeCount - 1;
     if (self.timeCount == 0) {
         [self stop];
     }else{
-        if (self.timeBlock) {
-            NSString *text = self.timeBlock(self.timeCount);
-            [self setTitle:text forState:UIControlStateNormal];
-        }
+        [self updateTitleWith:self.timeCount];
+    }
+}
+-(void)updateTitleWith:(int)timeCount{
+    if (self.timeBlock) {
+        NSString *text = self.timeBlock(timeCount);
+        [self setTitle:text forState:UIControlStateNormal];
     }
 }
 #pragma mark- Setter
--(void)setSeconds:(int)seconds{
-    _seconds = seconds;
-    self.timeCount = seconds + 1;
-}
 #pragma mark- Getter
 #pragma mark- LifeCycle
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.seconds = 60;
+    }
+    return self;
+}
 -(instancetype)init{
     if (self = [super init]) {
-        [self updateTitle];
         self.seconds = 60;
     }
     return self;
@@ -62,4 +66,5 @@
         self.timer = nil;
     }
 }
+
 @end
