@@ -50,4 +50,8 @@
         });
     }
 }
+/** 判断对象是否是数组 */
+-(BOOL)isArray{
+    return [self isKindOfClass:[NSArray class]];
+}
 @end

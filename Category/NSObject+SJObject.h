@@ -25,4 +25,6 @@
 +(void)actionWithMainQueue:(void (^)(void))action;
 /** 在多线程执行的任务 */
 +(void)actionWithGlobalQueue:(void(^)(void))action;
+/** 判断对象是否是数组 */
+-(BOOL)isArray;
 @end
