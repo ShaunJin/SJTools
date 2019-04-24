@@ -26,14 +26,20 @@ NSString * const SJTextFieldDidDeleteBackwardNotification = @"com.shajin.textfie
     [[NSNotificationCenter defaultCenter] postNotificationName:SJTextFieldDidDeleteBackwardNotification object:self];
 }
 /** 创建textfield */
-+(instancetype)textFieldWithTextColor:(UIColor *)color size:(CGFloat)size placeholder:(NSString *)placeholder{
-    UITextField *textField = [UITextField new];
++(instancetype)textFieldWithTextColor:(UIColor *)color size:(CGFloat)size placeholder:(nullable NSString *)placeholder{
+
+    return [self textFieldWithTextColor:color size:size placeholder:placeholder placeholderColor:nil];
+}
+/** 创建textfield */
++(instancetype)textFieldWithTextColor:(UIColor *)color size:(CGFloat)size placeholder:(nullable NSString *)placeholder placeholderColor:(nullable UIColor *)placeholderColor{
+    UITextField *textField = [self new];
     textField.font = kFontSize(size);
-    if (placeholder) {
+    if (placeholder && placeholderColor) {
+        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: placeholderColor}];
+    }else if(placeholder){
         textField.placeholder = placeholder;
     }
     textField.textColor = color;
     return textField;
 }
-
 @end

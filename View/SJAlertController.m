@@ -68,7 +68,7 @@
     if ([viewController isKindOfClass:[UIViewController class]]) {
         [viewController presentViewController:alertController animated:YES completion:nil];
     }else{
-        [kRootViewController presentViewController:alertController animated:YES completion:nil];
+        [[UIViewController topViewController] presentViewController:alertController animated:YES completion:nil];
     }
 }
 /** 判断是否是block */

@@ -22,12 +22,12 @@
 /** 判断系统版本是否大于某（含）版本 */
 #define IsLaterVersion(version) (([[[UIDevice currentDevice] systemVersion] floatValue] >= version)? (YES):(NO))
 #define IOS_VERSION_9_OR_LATER IsLaterVersion(9.0)
+
 #ifdef IOS_VERSION_9_OR_LATER
 
 #define kRegFont             @"PingFangSC-Regular"
 #define kMedFont             @"PingFangSC-Medium"
 #define kSemFont             @"PingFangSC-Semibold"
-
 #else
 
 #define kRegFont             @"HelveticaNeue-Thin"
@@ -56,12 +56,12 @@
 #define kTabBarHeight        (kHasSafeArea ? 83.0 : 49.0)   // tabBard高度（加上底部安全区域的）
 #define kBottomHeight        (kHasSafeArea ? 34.0 : 0.0)    // 底部高度（有安全区域时是安全区域的高度，没有安全区域为0）
 
-#define kHeightNoNaviBar            kHeight - kNaviBarH
-#define kHeightNoNaviBarNoTabBar    kHeight - kNaviBarH - kTabBarH
+#define kHeightNoNaviBar            kHeight - kNaviBarHeight
+#define kHeightNoNaviBarNoTabBar    kHeight - kNaviBarHeight - kTabBarHeight
 
 
 /** 字号 */
-#define kFontSize(size) [UIFont systemFontOfSize:size]
+#define kFontSize(fontSize) [UIFont fontWithName:kMedFont size:fontSize]
 /** 颜色 */
 #define Color(R, G, B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0]
 #define ColorA(r, g, b, a) ([UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a])

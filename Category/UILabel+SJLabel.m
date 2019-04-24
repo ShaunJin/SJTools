@@ -20,7 +20,7 @@
 }
 /** 创建label */
 +(instancetype)labelWithTextColor:(UIColor *)textColor size:(CGFloat)size{
-    UILabel *label = [[UILabel alloc] init];
+    UILabel *label = [[self alloc] init];
     label.textColor = textColor;
     label.font = [UIFont fontWithName:kMedFont size:size];
     return label;
