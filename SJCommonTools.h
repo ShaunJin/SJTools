@@ -25,5 +25,6 @@
 #import "UITextField+SJTextField.h"
 #import "UITableView+SJTableView.h"
 #import "UINavigationController+SJNavigationController.h"
+#import "UIViewController+SJViewController.h"
 #import "UIColor+SJColor.h"
 #endif /* SJCommonTools_h */
