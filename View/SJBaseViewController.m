@@ -35,8 +35,8 @@
     button.frame = CGRectMake(0, 0, 20, 20);
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    [button setTitleColor:kThemeColor forState:UIControlStateNormal];
-    [button setTitleColor:kTitleDColor forState:UIControlStateHighlighted];
+    [button setTitleColor:Color(51, 51, 51) forState:UIControlStateNormal];
+    [button setTitleColor:Color(204, 204, 204) forState:UIControlStateHighlighted];
     button.titleLabel.font = [UIFont systemFontOfSize:16];
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = buttonItem;
@@ -58,8 +58,8 @@
     button.frame = CGRectMake(0, 0, 20, 20);
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    [button setTitleColor:kThemeColor forState:UIControlStateNormal];
-    [button setTitleColor:kTitleDColor forState:UIControlStateHighlighted];
+    [button setTitleColor:Color(51, 51, 51) forState:UIControlStateNormal];
+    [button setTitleColor:Color(204, 204, 204) forState:UIControlStateHighlighted];
     button.titleLabel.font = [UIFont systemFontOfSize:16];
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = buttonItem;

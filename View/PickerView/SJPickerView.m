@@ -31,7 +31,7 @@
 }
 -(UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel labelWithTextColor:kTitleBColor size:15];
+        _titleLabel = [UILabel labelWithTextColor:Color(102, 102, 102) size:15];
     }
     return _titleLabel;
 }

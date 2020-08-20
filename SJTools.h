@@ -1,6 +1,6 @@
 //
-//  SJCommonTools.h
-//  SJCommonTools
+//  SJTools.h
+//  SJTools
 //
 //  Created by ShaJin on 2017/11/2.
 //  Copyright © 2017年 ShaJin. All rights reserved.
