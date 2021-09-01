@@ -18,13 +18,17 @@
 /** 移除所有通知 */
 -(void)removeNotification;
 /** 发送一个通知 */
--(void)postNotificationWithName:(NSString *)noticationName object:(id)object;
++(void)postNotificationWithName:(NSString *)noticationName object:(id)object;
 /** 发送一个通知 */
 +(void)postNotificationWithName:(NSString *)noticationName;
 /** 在主线程执行的任务 */
-+(void)actionWithMainQueue:(void (^)(void))action;
++(void)actionWithMainQueue:(dispatch_block_t)action;
 /** 在多线程执行的任务 */
-+(void)actionWithGlobalQueue:(void(^)(void))action;
++(void)actionWithGlobalQueue:(dispatch_block_t)action;
+/** 延时执行的任务 */
++(void)actionWithDelay:(float)delay action:(dispatch_block_t)action;
 /** 判断对象是否是数组 */
 -(BOOL)isArray;
+/** 获取属性名数组 */
++(NSArray<NSString *> *)getPropertyList;
 @end
