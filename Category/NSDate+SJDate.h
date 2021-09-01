@@ -16,9 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 /** 根据时间戳获取字符串 */
 +(NSString *)stringWithTimeInterval:(NSTimeInterval)timeInterval useDateFormatter:(NSString *)formatter;
 /** 将字符串转换成NSDate(需提供格式) */
-+(NSDate *)dateWithString:(NSString *)dateStr formatter:(NSString *)formatterStr;
++(NSDate *)dateWithString:(NSString *)dateStr formatter:(nullable NSString *)formatterStr;
 /** 将NSDate转换成字符串时间(刚刚、几分钟前、几小时前形式) */
 -(NSString *)toString;
+/** 将NSDate转换成指定格式的字符串 */
+-(NSString *)toStringWithFormat:(NSString *)formatterStr;
 @end
 
 NS_ASSUME_NONNULL_END

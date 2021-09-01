@@ -25,10 +25,18 @@
     return [self stringWithTimeInterval:[NSDate date].timeIntervalSince1970 useDateFormatter:formatter];
 }
 /** 将字符串转换成NSDate(需提供格式) */
-+(NSDate *)dateWithString:(NSString *)dateStr formatter:(NSString *)formatterStr{
++(NSDate *)dateWithString:(NSString *)dateStr formatter:(nullable NSString *)formatterStr{
+    NSSet *set = [NSSet setWithObjects:ifNull(formatterStr),@"yyyy-MM-dd HH:mm",@"yyyy-MM-dd HH:mm:ss",@"yyyy-MM-dd", nil];
     NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:formatterStr];
-    return [formatter dateFromString:dateStr];
+    NSDate *date = nil;
+    for (NSString *dateFormat in [set allObjects]) {
+        [formatter setDateFormat:dateFormat];
+        date = [formatter dateFromString:dateStr];
+        if (date) {
+            break;
+        }
+    }
+    return date;
 }
 /** 将NSDate转换成字符串时间(刚刚、几分钟前、几小时前形式) */
 -(NSString *)toString{
@@ -59,5 +67,11 @@
         return [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeInterval]];
     }
     return nil;
+}
+/** 将NSDate转换成指定格式的字符串 */
+-(NSString *)toStringWithFormat:(NSString *)formatterStr{
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:formatterStr];
+    return [formatter stringFromDate:self];
 }
 @end

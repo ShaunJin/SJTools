@@ -6,8 +6,8 @@
 //  Copyright © 2017年 ShaJin. All rights reserved.
 //
 
-#ifndef SJCommonTools_h
-#define SJCommonTools_h
+#ifndef SJTools_h
+#define SJTools_h
 
 #import "SJDefines.h"
 #import "SJBaseAlertView.h"
@@ -28,4 +28,4 @@
 #import "UIViewController+SJViewController.h"
 #import "UIColor+SJColor.h"
 #import "NSDate+SJDate.h"
-#endif /* SJCommonTools_h */
+#endif /* SJTools_h */
