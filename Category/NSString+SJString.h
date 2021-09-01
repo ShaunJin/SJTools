@@ -8,18 +8,18 @@
 // 字符串的扩展
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+NS_ASSUME_NONNULL_BEGIN
 @interface NSString (SJString)
 /** 字符串不存在替换成@“” */
 NSString * ifNull(NSString *text);
+/** 自动补全 */
+NSString * kAutoComplete(NSString *text, NSString *complete);
 /** 根据<p>标签分隔html字符串 */
 -(NSArray<NSString *> *)componentsSeparatedByTapP;
 /** 字典或数组转换成字符串 */
 +(NSString *)stringWithJsonData:(id)data;
 /** 计算单行文字宽度 */
--(CGFloat)widthWithSize:(int)size kDeprecated("use -widthWithFont:");
 -(CGFloat)widthWithFont:(UIFont *)font;
-/** 计算指定宽度文字高度 */
--(CGFloat)heightWithWidth:(CGFloat)width size:(int)size kDeprecated("use -heightWithWidth:font");
 /** 计算指定宽度文字高度 */
 -(CGFloat)heightWithWidth:(CGFloat)width font:(UIFont *)font;
 /** 对字符串进行URL编码 */
@@ -29,15 +29,13 @@ NSString * ifNull(NSString *text);
 /** 根据size计算文件大小 */
 +(NSString *)stringWithSize:(NSInteger)size;
 /** 时间戳转换时间 */
--(NSString *)stringWithDataFormatter:(NSString *)dateFormatter;
+-(NSString *)stringWithDataFormatter:(nullable NSString *)dateFormatter;
 /** 时间戳转换成时间(刚刚、几分钟前、几小时前形式) */
 -(NSString *)translateDateFormatter:(NSString *)dateFormatter;
+/** 将当前时间格式化成字符串 */
++(NSString *)stringDateWithFormatter:(nullable NSString *)dateFormatter;
 /** 替换字符串中的特殊符号 */
 -(NSString *)encodeURIComponent;
-/** 判定是否是手机号 */
--(BOOL)isPhoneNumber;
-/** 身份证号验证(粗略验证，只判断格式是否正确) */
--(BOOL)isIdNmuber;
 /**
  将文字按行分割成字符串
  
@@ -62,4 +60,13 @@ NSString * ifNull(NSString *text);
  @return 过滤后的文字
  */
 +(NSString *)filterHTML:(NSString *)html;
+/** 根据url组装出参数字典（url中？后边的内容） */
+-(NSDictionary *)getParams;
+/** 获取host name(一个url中:到？之间的内容) */
+-(NSString *)getHostName;
+/** 获取协议名(一个url中:前边的内容) */
+-(NSString *)getProtocol;
+/** 判断自身是否符合正则 ,pattern是正则表达式*/
+-(BOOL)isMatchWithPattern:(NSString *)pattern;
 @end
+NS_ASSUME_NONNULL_END

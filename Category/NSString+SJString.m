@@ -11,10 +11,20 @@
 @implementation NSString (SJString)
 /** 自动补全 */
 NSString * ifNull(NSString *text){
-    return (text.length > 0) ? text : @"";
+    return text ? kAutoComplete([NSString stringWithFormat:@"%@",text], @"") : @"";
+}
+/** 自动补全 */
+NSString * kAutoComplete(NSString *text, NSString *complete){
+    if (text && [text isKindOfClass:[NSString class]]) {
+        return text.length > 0 ? text : complete;
+    }
+    return  complete;
 }
 /** 字典或数组转换成字符串 */
 +(NSString *)stringWithJsonData:(id)data{
+    if (!data) {
+        return nil;
+    }
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonString;
@@ -86,10 +96,10 @@ NSString * ifNull(NSString *text){
 }
 
 /** 时间戳转换时间 */
--(NSString *)stringWithDataFormatter:(NSString *)dateFormatter{
+-(NSString *)stringWithDataFormatter:(nullable NSString *)dateFormatter{
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = (dateFormatter) ? dateFormatter : @"yyyy-MM-dd HH:mm";
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:(self.length == 10) ? [self integerValue] : [self integerValue] * 1000];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:(self.length == 10) ? [self integerValue] : [self integerValue] / 1000];
     return [formatter stringFromDate:date];
 }
 /** 时间戳转换成时间(刚刚、几分钟前、几小时前形式) */
@@ -111,7 +121,12 @@ NSString * ifNull(NSString *text){
     }
     return nil;
 }
-
+/** 将当前时间格式化成字符串 */
++(NSString *)stringDateWithFormatter:(nullable NSString *)dateFormatter{
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = (dateFormatter) ? dateFormatter : @"yyyy-MM-dd HH:mm";
+    return [formatter stringFromDate:[NSDate date]];
+}
 /**
  按行数截取字符串
  
@@ -203,20 +218,65 @@ NSString * ifNull(NSString *text){
 #pragma clang diagnostic pop
     return encodedString;
 }
-/** 判定是否是手机号 */
--(BOOL)isPhoneNumber{
-    NSString *pattern = @"^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[0678])\\d{8}$";
-    return [self isMatchWithPattern:pattern];
-}
-/** 身份证号验证(粗略验证) */
--(BOOL)isIdNmuber{
-    NSString *pattern = @"(^[0-9]{15}$)|([0-9]{17}([0-9]|X)$)";
-    return [self isMatchWithPattern:pattern];
-}
 /** 判断自身是否符合正则 */
 -(BOOL)isMatchWithPattern:(NSString *)pattern{
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:self];
     return isMatch;
+}
+/** 根据url组装出参数字典 */
+-(NSDictionary *)getParams{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSRange range = [self rangeOfString:@"?"];
+    if (range.location != NSNotFound) {
+        NSString *queryStr = [self substringFromIndex:range.location + 1];
+        NSArray *queryArr = [queryStr componentsSeparatedByString:@"&"];
+        for (NSString *query in queryArr) {
+            NSArray *arr = [query componentsSeparatedByString:@"="];
+            if (arr.count == 2) {
+                dict[arr[0]] = dict[arr[1]];
+                [dict setObject:arr[1] forKey:arr[0]];
+            }
+        }
+    }
+    return [dict copy];
+}
+/** 获取host name(一个url中:到？或/之间的内容) */
+-(NSString *)getHostName{
+    NSString *url = [self copy];
+    NSRange range = [url rangeOfString:@"://"];
+    if (range.location != NSNotFound) {
+        url = [url substringFromIndex:range.location + 3];
+    }else{
+        range = [url rangeOfString:@":"];
+        if (range.location != NSNotFound) {
+            url = [url substringFromIndex:range.location + 1];
+        }
+    }
+    range = [url rangeOfString:@"?"];
+    if (range.location != NSNotFound) {
+        url = [url substringToIndex:range.location];
+    }
+    range = [url rangeOfString:@"/"];
+    if (range.location != NSNotFound) {
+        url = [url substringToIndex:range.location];
+    }
+    return url;
+}
+/** 获取协议名(一个url中:前边的内容) */
+-(NSString *)getProtocol{
+    NSString *url = [self copy];
+    NSRange range = [url rangeOfString:@"://"];
+    if (range.location != NSNotFound) {
+        url = [url substringToIndex:range.location];
+    }else{
+        range = [url rangeOfString:@":"];
+        if (range.location != NSNotFound) {
+            url = [url substringToIndex:range.location];
+        }else{
+            url = @"";
+        }
+    }
+    return url;
 }
 @end
