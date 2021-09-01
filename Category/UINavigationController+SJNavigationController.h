@@ -25,11 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(UIBarButtonItem *)getRightBtnItemWithImgName:(NSString *)imageName target:(UIViewController *)vc method:(SEL)sel;
 
-/**
- *  创建导航栏右侧文字按钮
- 
- */
+/** 创建导航栏右侧文字按钮 */
 -(UIBarButtonItem *)getRightBtnItemWithTitle:(NSString *)title target:(UIViewController *)vc method:(SEL)sel;
+/** 获取当前的导航控制器 */
++(UINavigationController *)getCurrentNavigationController;
 @end
 
 NS_ASSUME_NONNULL_END
