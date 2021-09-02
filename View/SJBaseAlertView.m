@@ -9,7 +9,8 @@
 #import "SJBaseAlertView.h"
 
 @interface SJBaseAlertView()
-@property(nonatomic,strong)UIView *backgroungView;
+@property(nonatomic,strong)UIView *backgroundView;
+@property(nonatomic,strong)NSValue *oriFrame;
 @end
 @implementation SJBaseAlertView
 #pragma mark- CustomMethod
@@ -22,16 +23,18 @@
     self.duration = 0.25;
 }
 -(void)show{
-    CGRect oriFrame = self.frame;
-    [[UIApplication sharedApplication].keyWindow addSubview:self.backgroungView];
+    if (!self.oriFrame) {
+        self.oriFrame = [NSValue valueWithCGRect:self.frame];
+    }
+    [[UIApplication sharedApplication].keyWindow addSubview:self.backgroundView];
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     switch (_animationType) {
         case kAnimationBottom:{
             self.top = kHeight;
             [UIView animateWithDuration: self.duration animations:^{
-                self.frame = oriFrame;
+                self.frame = [self.oriFrame CGRectValue];
                 self.alpha = 1;
-                self.backgroungView.alpha = 1;
+                self.backgroundView.alpha = 1;
             } completion:^(BOOL finished) {
                 
             }];
@@ -42,7 +45,7 @@
             [UIView animateWithDuration: self.duration animations:^{
                 self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
                 self.alpha = 1;
-                self.backgroungView.alpha = 1;
+                self.backgroundView.alpha = 1;
             } completion:^(BOOL finished) {
                 
             }];
@@ -54,20 +57,20 @@
         case kAnimationBottom:{
             [UIView animateWithDuration: self.duration animations:^{
                 self.top = kHeight;
-                self.backgroungView.alpha = 0;
+                self.backgroundView.alpha = 0;
             } completion:^(BOOL finished) {
                 [self removeFromSuperview];
-                [self.backgroungView removeFromSuperview];
+                [self.backgroundView removeFromSuperview];
             }];
         }break;
         default:{
             [UIView animateWithDuration: self.duration animations:^{
                 self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
                 self.alpha = 0;
-                self.backgroungView.alpha = 0;
+                self.backgroundView.alpha = 0;
             } completion:^(BOOL finished) {
                 [self removeFromSuperview];
-                [self.backgroungView removeFromSuperview];
+                [self.backgroundView removeFromSuperview];
             }];
         }break;
     }
@@ -91,15 +94,15 @@
     self.layer.shadowRadius = isShowShadow ? 2.0 : 0;
 }
 #pragma mark- Getter
--(UIView *)backgroungView{
-    if (!_backgroungView) {
-        _backgroungView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight)];
-        _backgroungView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
-        _backgroungView.alpha = 0;
+-(UIView *)backgroundView{
+    if (!_backgroundView) {
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight)];
+        _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+        _backgroundView.alpha = 0;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(touchOutSide)];
-        [_backgroungView addGestureRecognizer: tap];
+        [_backgroundView addGestureRecognizer: tap];
     }
-    return _backgroungView;
+    return _backgroundView;
 }
 #pragma mark- 初始化
 -(instancetype)initWithFrame:(CGRect)frame{
