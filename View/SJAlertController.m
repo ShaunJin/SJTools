@@ -7,12 +7,55 @@
 //
 
 #import "SJAlertController.h"
+#import "NSObject+SJObject.h"
+@interface SJToastView : UIView
+@property(nonatomic,strong)UILabel *textLabel;
+@end
+
+@implementation SJToastView
+-(UILabel *)textLabel{
+    if (!_textLabel) {
+        _textLabel = [UILabel labelWithTextColor:Color(51, 51, 51) size:17];
+        _textLabel.textAlignment = 1;
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+-(instancetype)init{
+    CGFloat width = 240;
+    CGFloat height = 44;
+    CGRect frame = CGRectMake(ceil((kWidth - width) / 2), 0 - height, width, height);
+    if (self = [super initWithFrame:frame]) {
+        self.textLabel.frame = self.bounds;
+        self.backgroundColor = [UIColor whiteColor];
+        self.radius = height / 2;
+    }
+    return self;
+}
++(void)showToast:(NSString *)toast{
+    SJToastView *toastView = [SJToastView new];
+    toastView.textLabel.text = toast;
+    [[UIApplication sharedApplication].keyWindow addSubview:toastView];
+    [UIView animateWithDuration:0.25 animations:^{
+        toastView.top = kSafeAreaTop;
+    }];
+    [NSObject actionWithDelay:2 action:^{
+        [UIView animateWithDuration:0.25 animations:^{
+            toastView.bottom = 0;
+        }];
+    }];
+}
+@end
 
 @interface SJAlertController ()
 @property(nonatomic,strong)NSMutableArray *blockList;
 @end
 
 @implementation SJAlertController
+/** toast */
++(void)makeToast:(NSString *)toast{
+    [SJToastView showToast:toast];
+}
 /** 自定义标题及提示信息的弹窗 */
 +(void)alertWithTitle:(NSString *)title message:(NSString *)message{
     [self makeAlertWithTitle:title message:message blockList:nil titleList:@[@"确定"]];
@@ -57,7 +100,7 @@
         NSString *actionTitle = titleList[i];
         UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (blockList.count > i) {
-                if ([self YwSy_isBlock_YwSy:blockList[i]]) {
+                if ([self isBlock:blockList[i]]) {
                     dispatch_block_t block = (dispatch_block_t)blockList[i];
                     block();
                 }
@@ -72,7 +115,7 @@
     }
 }
 /** 判断是否是block */
-+(BOOL)YwSy_isBlock_YwSy:(id)pBlock
++(BOOL)isBlock:(id)pBlock
 {
     NSString *className = NSStringFromClass([pBlock class]);
     return  [className isEqualToString:@"__NSMallocBlock__"]||

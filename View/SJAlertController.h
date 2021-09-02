@@ -29,4 +29,6 @@
 +(void)makeAlertWithTitle:(NSString *)title message:(NSString *)message blockList:(NSArray *)blockList titleList:(NSArray *)titleList;
 /** 在指定页面创建弹窗创建弹窗 */
 +(void)makeAlertWithTitle:(NSString *)title message:(NSString *)message blockList:(NSArray *)blockList titleList:(NSArray *)titleList onViewController:(UIViewController *)viewController;
+/** toast */
++(void)makeToast:(NSString *)toast;
 @end
