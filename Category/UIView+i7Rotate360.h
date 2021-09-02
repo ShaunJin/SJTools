@@ -6,7 +6,7 @@
 //  Copyright 2010 include7 AG. All rights reserved.
 //
 
-
+#import <UIKit/UIKit.h>
 
 enum i7Rotate360TimingMode {
 	i7Rotate360TimingModeEaseInEaseOut,
