@@ -21,6 +21,8 @@
     // 去除导航栏底部细线
     UIImageView *bottomLine = [self findHairlineImageViewUnder:self.navigationBar];
     bottomLine.hidden = YES;
+    [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationBar.shadowImage = [UIImage new];
     // 自定义底部细线
     [self.navigationBar addSubview:self.line];
 }
