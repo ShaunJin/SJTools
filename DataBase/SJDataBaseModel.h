@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SJDataBaseModel : NSObject
 /** 主键键值  */
-@property(nonatomic,strong,readonly)NSString *primaryId;
+//@property(nonatomic,strong,readonly)NSString *primaryId;
 //@property(nonnull,assign)short
 /**
  * 数据库路径
@@ -39,23 +39,55 @@ NS_ASSUME_NONNULL_BEGIN
 +(nullable NSString *)primaryKey;
 /** 数据库表名，默认为类名 */
 +(NSString *)tableName;
-
-
+///** 建表语句 */
+//+(NSString *)createSQL;
+///** 建表语句 */
+//+(NSString *)createSQLWithName:(NSString *)tableName;
+///** 删除表,慎用 */
+//+(void)dropTable;
+//+(void)dropTableWithName:(NSString *)table;
+/** 建表 */
++(void)createTable;
+/** 建表（指定表名，后续数据库操作都要指定表名） */
++(void)createTableWithName:(NSString *)name;
 #pragma mark- 增、删、改、查
 /** 插入数据库 */
 -(void)insert;
+-(void)insertObjectTo:(NSString *)tableName;
 /** 批量插入数据，需要传待保存对象的数组 */
 +(void)insertObjects:(NSArray *)array;
++(void)insertObjects:(NSArray *)array to:(NSString *)tableName;
 /** 从数据库中删除 */
 -(void)remove;
+-(void)removeObjectFrom:(NSString *)tableName;
++(void)removeByPrimaryId:(NSString *)primaryId;
++(void)removeByPrimaryId:(NSString *)primaryId table:(NSString *)table;
+/** 清空表，删除所有数据 */
++(void)clearTable;
++(void)clearTableWithName:(NSString *)table;
 /** 修改数据 */
 -(void)update;
+-(void)updateObjectAt:(NSString *)tableName;
 /** 查询所有数据 */
 +(NSArray *)selectAll;
++(NSArray *)selectAllObjectsFrom:(NSString *)tableName;
+/** 查询所有数据，带排序 */
++(NSArray *)selectAllOrderBy:(NSString *)order;
 /** 自定义where条件的查询 */
 +(NSArray *)selectByWhere:(NSString *)where;
++(NSArray *)selectByWhere:(NSString *)where table:(NSString *)table;
++(NSArray *)selectByWhere:(NSString *)where orderBy:(NSString *)order limit:(int)limit;
++(NSArray *)select:(NSString *)select table:(NSString *)tableName where :(NSString *)where orderBy:(NSString *)order limit:(int)limit;
++(NSArray *)select:(NSString *)select table:(NSString *)tableName where :(NSString *)where orderBy:(NSString *)order limit:(int)limit offset:(int)offset;
 /** 根据主键查询，返回一个对象，未查询到返回nil） */
 +(nullable id)selectByPrimaryId:(NSString *)primaryId;
++(nullable id)selectByPrimaryId:(NSString *)primaryId table:(NSString *)table;
+/** 统计数量 */
++(NSUInteger)selectCountByWhere:(nullable NSString *)where;
++(NSUInteger)selectCountByWhere:(NSString *)where table:(NSString *)table;
++(NSUInteger)selectCountByWhereDict:(nullable NSDictionary *)where;
++(NSUInteger)selectCountByWhereDict:(nullable NSDictionary *)where table:(NSString *)table;
+#pragma mark- StaticMethod
 /** 根据字典构建对象 */
 +(instancetype)objectWithDictionary:(NSDictionary *)dict;
 /** 根据数组构建对象数据 */

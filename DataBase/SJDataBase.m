@@ -7,9 +7,9 @@
 //
 
 #import "SJDataBase.h"
-#import <sqlite3.h>
 #import "SJDataBaseModel.h"
-
+//#import "FMDB.h"
+#import <FMDB/FMDB.h>
 #define kCheckClass(aClass) NSAssert1([aClass isSubclassOfClass:[SJDataBaseModel class]], @"传入了错误的类，%@不是SJDataBaseModel的子类", NSStringFromClass(aClass))
 #define kCheckEmptyString(str,message)\
 if ([str isKindOfClass:[NSNull class]] || str == nil || [str length]<=0){\
@@ -20,93 +20,79 @@ return;\
 @interface SJDataBaseModel()
 /** 获取所有属性及对应SQLite类型 例：@{@"PropertyName":@"name",@"PropertyType":@"text"}  */
 +(NSArray *)getPropertys;
+/** 建表语句 */
++(NSString *)createSQL;
 @end
 @implementation SJDataBase
-+(void)createTableWithClass:(Class)aClass{
-    kCheckClass(aClass);
-    // TODO: 修改字段名称、增加删减字段等功能暂不支持
-    NSMutableString *sql = [NSMutableString stringWithFormat:@"create table if not exists '%@' (",[aClass tableName]];
-#pragma mark- Waring 默认主键添加进来了 要解决
-    NSArray *propertys = [aClass getPropertys];
-//    NSLog(@"propertys = %@",propertys);
-    for (NSDictionary *dict in propertys) {
-        NSString *name = dict[kPropertyName];
-        NSString *type = dict[kPropertyType];
-        if (dict[kPrimaryKeyType]) {
-            [sql appendFormat:@"'%@' %@ not null primary key %@",name,type,([dict[kPrimaryKeyType] intValue] == 1) ? @"AUTOINCREMENT" : @""];
-        }else{
-            [sql appendFormat:@", '%@' %@",name,type];
-        }
-    }
-    [sql appendString:@")"];
-//    NSLog(@"sql = %@",sql);
-    [self executeSQL:sql useClass:aClass complete:nil];
-}
+//+(void)createTableWithClass:(Class)aClass{
+//    kCheckClass(aClass);
+//    [self executeSQL:[aClass createSQL] useClass:aClass complete:nil];
+//}
+///** 用指定的tableName建表，不使用Class的tableName */
+//+(void)createTableWithClass:(Class)aClass tableName:(NSString *)tableName{
+//    kCheckClass(aClass);
+//    
+//}
 #pragma mark- 数据库相关操作
-+(NSArray *)select:(NSString *)select where:(NSString *)where useClass:(Class)aClass{
-    select = IsEmptyString(select) ? @"*" : select;
-    NSAssert(!IsEmptyString(where), @"where不能为空");
-    NSString *sql = [NSString stringWithFormat:@"select %@ from %@ where %@",select,[aClass tableName],where];
-    return [self executeSelect:sql useClass:aClass];
-}
 /** 执行select语句 */
 +(NSArray *)executeSelect:(NSString *)sql useClass:(Class)aClass{
     kCheckClass(aClass);
     NSLog(@"%@ executeSelect: %@",NSStringFromClass(aClass),sql);
     NSMutableArray *array = [NSMutableArray array];
-    sqlite3 *db = [self open:aClass];
-#pragma mark- Waring
-    NSArray *propertys = [aClass getPropertys];
-    sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, sql.UTF8String, -1, &stmt, NULL) == SQLITE_OK) {
-        while (sqlite3_step(stmt) == SQLITE_ROW) {
-            NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
-            for (int i = 0; i < propertys.count; i++) {
-                NSDictionary *dict = propertys[i];
-                NSString *name = dict[kPropertyName];
-                NSString *value = [self textForStmt:stmt at:i];
-                if (name && value) {
-                    mDict[name] = value;
-                }
-            }
-            [array addObject:mDict];
+    FMDatabase *db = [self open:aClass];
+    if (db) {
+        FMResultSet *result = [db executeQuery:sql];
+        while ([result next]) {
+            [array addObject:result.resultDictionary];
         }
     }
-    sqlite3_finalize(stmt);
-    return [array copy];
-}
-+(nullable NSString *)textForStmt:(sqlite3_stmt *)stmt at:(int)index{
-    const char * result = (const char *)sqlite3_column_text(stmt, index);
-    return result ? [NSString stringWithUTF8String:result] : nil;
+    return array;
 }
 /** 执行SQL语句 */
 +(void)executeSQL:(NSString *)sql useClass:(Class)aClass complete:(nullable void(^)( NSError * _Nullable error))complete{
     kCheckClass(aClass);
-    NSLog(@"%@ executeSQL: %@",NSStringFromClass(aClass),sql);
-    char *err = nil;
-    sqlite3 *db = [self open:aClass];
-    int result = sqlite3_exec(db, sql.UTF8String, nil, nil, &err);
-    if (complete) {
-        if (err) {
-            NSDictionary *userInfo = @{NSLocalizedDescriptionKey:[NSString stringWithUTF8String:err]};
-            NSError *error = [NSError errorWithDomain:@"SJSqlite" code:result userInfo:userInfo];
-            complete(error);
-        }else{
-            complete(nil);
+    NSLog(@"excuteSQL:%@",sql);
+    FMDatabase *db = [self open:aClass];
+    if (db) {
+        BOOL result = [db executeUpdate:sql];
+        if (complete) {
+            if (result) {
+                complete(nil);
+            }else{
+                complete([db lastError]);
+            }
         }
     }
-    [self close:db];
 }
-+(sqlite3 *)open:(Class)aClass{
++(FMDatabase *)open:(Class)aClass{
     kCheckClass(aClass);
-    sqlite3 *db = nil;
     NSString *path = [self getPath:aClass];
-//    NSLog(@"DataBasePath = %@",path);
-    sqlite3_open(path.UTF8String, &db);
-    return db;
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:path];
+    if ([db open]) {
+        return db;
+    }else{
+        NSLog(@"数据库打开错误,path = %@",path);
+        return nil;
+    }
 }
-+(void)close:(sqlite3 *)db{
-    sqlite3_close(db);
+/** 表是否存在 */
++(BOOL)tableExists:(NSString*)tableName useClass:(Class)aClass{
+    kCheckClass(aClass);
+    FMDatabase *db = [self open:aClass];
+    if (db) {
+        return  [db tableExists:tableName];
+    }
+    return NO;
+}
+/** 字段是否存在 */
++(BOOL)columnExists:(NSString*)columnName inTableWithName:(NSString*)tableName useClass:(Class)aClass{
+    kCheckClass(aClass);
+    FMDatabase *db = [self open:aClass];
+    if (db) {
+        return  [db columnExists:columnName inTableWithName:tableName];
+    }
+    return NO;
 }
 #pragma mark- CustomMethod
 /** 获取数据库文件路径 */
