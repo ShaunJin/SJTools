@@ -11,7 +11,7 @@
 // 过期提醒
 #define kDeprecated(instead) API_DEPRECATED(instead, macosx(10.2,10.14), ios(2.0,2.0), watchos(2.0,5.0), tvos(9.0,12.0))
 /** 判断字符串是否为空 */
-#define IsEmptyString(str) (([str isKindOfClass:[NSNull class]] || str == nil || [str length]<=0)? YES : NO )
+#define IsEmptyString(str) (([str isKindOfClass:[NSString class]] && [str length] > 0)? NO : YES )
 
 /** 系统版本 */
 #define SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
@@ -34,31 +34,13 @@
 #define kMedFont             @"HelveticaNeue-Medium"
 
 #endif
-/** 判断是否是刘海屏幕 */
-#define kHasSafeArea ({\
-    int tmp = 0;\
-    if (@available(iOS 11.0, *)) {\
-        if (kMainWindow.safeAreaInsets.bottom > 0) {\
-            tmp = 1;\
-        }\
-    }\
-    tmp;\
-})
+
 /** 屏幕宽高*/
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
 
-#define kScaleWidth(width)      kWidth * width / 375
-#define kScaleHeight(height)    kHeight * height / 667
-
-#define kStasusBarHeight     (kHasSafeArea ? 44.0 : 20.0)   // 状态栏高度
-#define kNaviBarHeight       (kHasSafeArea ? 88.0 : 64.0)   // 导航栏高度（加上状态栏）
-#define kTabBarHeight        (kHasSafeArea ? 83.0 : 49.0)   // tabBard高度（加上底部安全区域的）
-#define kBottomHeight        (kHasSafeArea ? 34.0 : 0.0)    // 底部高度（有安全区域时是安全区域的高度，没有安全区域为0）
-
-#define kHeightNoNaviBar            kHeight - kNaviBarHeight
-#define kHeightNoNaviBarNoTabBar    kHeight - kNaviBarHeight - kTabBarHeight
-
+/** 状态栏高度 */
+#define kNaviBarHeight    44
 
 /** 字号 */
 #define kFontSize(fontSize) [UIFont fontWithName:kMedFont size:fontSize]
@@ -73,6 +55,20 @@
 
 /** keyWindow */
 #define kMainWindow  [UIApplication sharedApplication].keyWindow
+#define kSafeAreaBottom ({\
+    CGFloat tmp = 0;\
+    if (@available(iOS 11.0, *)) {\
+        tmp = [UIApplication sharedApplication].delegate.window.safeAreaInsets.bottom;\
+    }\
+    tmp;\
+})
+#define kSafeAreaTop ({\
+    CGFloat tmp = 20;\
+    if (@available(iOS 11.0, *)) {\
+        tmp = [UIApplication sharedApplication].delegate.window.safeAreaInsets.top;\
+    }\
+    tmp;\
+})
 /** 根视图 */
 #define kRootViewController [UIApplication sharedApplication].keyWindow.rootViewController
 /** 快速声明block */
