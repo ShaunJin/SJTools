@@ -10,9 +10,17 @@
 
 @interface SJFileManager : NSObject
 /** 沙盒document文件夹路径 */
-@property(nonatomic,strong)NSString *documentPath;
-/** 检查目录是否存在，如不存在则创建 */
--(void)checkPath:(NSString *)path;
-/** 获取全局实例 */
-+(instancetype)manager;
++(NSString *)documentPath;
+/** 检查目录是否存在，如果不存在就创建 */
++(NSError *)createDirectoryIfNotExistAtPath:(NSString *)path;
+/** 存 */
++(void)save:(id<NSCoding>)object identifier:(NSString *)identifier;
+/** 存 */
++(void)saveData:(NSData *)data identifier:(NSString *)identifier;
+/** 取 */
++(id)getObjectWithIdentifier:(NSString *)identifier;
+/** 取 */
++(NSData *)getDataWithIdentifier:(NSString *)identifier;
+/** 删 */
++(void)deleteObjectWithIdentifier:(NSString *)identifier;
 @end
