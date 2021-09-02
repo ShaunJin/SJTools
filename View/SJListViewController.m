@@ -6,11 +6,8 @@
 //
 
 #import "SJListViewController.h"
-//#import "MJRefresh.h"
-#import <MJRefresh/MJRefresh.h>
-//#import "SDAutoLayout.h"
-#import <SDAutoLayout/SDAutoLayout.h>
-#import "EBResource.h"
+#import "MJRefresh.h"
+#import "SDAutoLayout.h"
 @interface SJListViewController ()
 @property(nonatomic,strong)dispatch_source_t list_timer;
 @end
@@ -110,7 +107,7 @@
         _defaultPage = [UIView new];
         _defaultPage.backgroundColor = self.view.backgroundColor;
         UIImageView *imageView = [UIImageView new];
-        imageView.image = EBLoadImage(@"icon_no_data");
+//        imageView.image = EBLoadImage(@"icon_no_data");
         [_defaultPage addSubview:imageView];
         UILabel *label = [UILabel labelWithTextColor:Color(141, 141, 141) size:14];
         label.text = @"暂无数据";

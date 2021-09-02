@@ -5,7 +5,7 @@
 //  Created by Air on 2021/4/8.
 //
 
-#import <EMBase/SJBaseViewController.h>
+#import "SJBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
