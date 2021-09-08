@@ -2,8 +2,7 @@
 //  SJCycleView.m
 //  SJCycleView
 //
-//  Created by qianfeng on 16/9/25.
-//  Copyright © 2016年 Aaron_zkh. All rights reserved.
+//  Created by ShaJin on 2021/9/8.
 //
 
 #import "SJCycleView.h"
@@ -12,7 +11,6 @@ typedef NS_ENUM(NSInteger, KHSourceType){
     KHSourceOnlineType = 0,
     KHSourceLocalType = 1
 };
-
 @interface SJCycleView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, weak)  UICollectionView *collectionView;
@@ -24,12 +22,16 @@ typedef NS_ENUM(NSInteger, KHSourceType){
 @property (nonatomic, weak)  UIView *bottomView;
 
 @property(nonatomic,assign)NSInteger currentPage;
+
+@property(nonatomic,assign)CGFloat lastOffsetX;
+
 @end
 
 @implementation SJCycleView
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSInteger currentPage = (scrollView.contentOffset.x / CGRectGetWidth(self.frame)) - 1;
+    CGFloat progress = scrollView.contentOffset.x / CGRectGetWidth(self.frame);
+    NSInteger currentPage = progress - 1;
     self.currentPage = currentPage;
     if (currentPage < 0){
         self.currentPage = self.count - 1;
@@ -51,8 +53,8 @@ typedef NS_ENUM(NSInteger, KHSourceType){
 }
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.delegate respondsToSelector:@selector(adView:didSelectViewAtIndex:)]) {
-        [self.delegate adView:self didSelectViewAtIndex:[self getIndexFromIndexPath:indexPath]];
+    if ([self.delegate respondsToSelector:@selector(cycleView:didSelectViewAtIndex:)]) {
+        [self.delegate cycleView:self didSelectViewAtIndex:[self getIndexFromIndexPath:indexPath]];
     }
 }
 #pragma mark - UICollectionViewDataSource
@@ -66,8 +68,8 @@ typedef NS_ENUM(NSInteger, KHSourceType){
         [subView removeFromSuperview];
     }
     NSInteger index = [self getIndexFromIndexPath:indexPath];
-    if ([self.delegate respondsToSelector:@selector(adView:viewForIndex:)]) {
-        UIView *view = [self.delegate adView:self viewForIndex:index];
+    if ([self.delegate respondsToSelector:@selector(cycleView:viewForIndex:)]) {
+        UIView *view = [self.delegate cycleView:self viewForIndex:index];
         [cell.contentView addSubview:view];
     }
     return cell;
@@ -92,8 +94,8 @@ typedef NS_ENUM(NSInteger, KHSourceType){
     if (_currentPage != currentPage) {
         _currentPage = currentPage;
         self.pageControl.currentPage = currentPage;
-        if ([self.delegate respondsToSelector:@selector(adView:didShowViewAtIndex:)]) {
-            [self.delegate adView:self didShowViewAtIndex:currentPage];
+        if ([self.delegate respondsToSelector:@selector(cycleView:didShowViewAtIndex:)]) {
+            [self.delegate cycleView:self didShowViewAtIndex:currentPage];
         }
     }
 }
@@ -174,7 +176,7 @@ typedef NS_ENUM(NSInteger, KHSourceType){
     NSInteger curPage = self.collectionView.contentOffset.x / CGRectGetWidth(self.collectionView.frame);
     NSInteger nextPage = 0;
     
-    if (self.direction == KHScrollDirectionFromRight) {
+    if (self.direction == SJScrollDirectionFromRight) {
         nextPage = curPage + 1;
         if (nextPage == self.count + 2) {
             nextPage = 2;
@@ -240,7 +242,7 @@ typedef NS_ENUM(NSInteger, KHSourceType){
     _pageIndicatorTintColor = [UIColor whiteColor];
     _currentPageIndicatorTintColor = [UIColor redColor];
     _bottomViewHeight = 30;
-    _direction = KHScrollDirectionFromRight;
+    _direction = SJScrollDirectionFromRight;
     _alpha = 0.3;
 }
 

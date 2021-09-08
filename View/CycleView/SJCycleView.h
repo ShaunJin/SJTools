@@ -2,22 +2,24 @@
 //  SJCycleView.h
 //  SJCycleView
 //
-//  Created by qianfeng on 16/9/25.
-//  Copyright © 2016年 Arron_zkh. All rights reserved.
+//  Created by ShaJin on 2021/9/8.
 //
 
 #import <UIKit/UIKit.h>
 @class SJCycleView;
-typedef NS_ENUM(NSInteger, KHScrollDirection){
-    KHScrollDirectionFromRight = 0,
-    KHScrollDirectionFromLeft = 1
+typedef NS_ENUM(NSInteger, SJScrollDirection){
+    SJScrollDirectionFromRight = 0,
+    SJScrollDirectionFromLeft = 1
 };
 @protocol SJAdViewDelegate <NSObject>
--(UIView *)adView:(SJCycleView *)adView viewForIndex:(NSInteger)index;
-
--(void)adView:(SJCycleView *)adView didSelectViewAtIndex:(NSInteger)index;
-
--(void)adView:(SJCycleView *)adView didShowViewAtIndex:(NSInteger)index;
+@required
+/** 某个位置要显示的视图 */
+-(UIView *)cycleView:(SJCycleView *)cycleView viewForIndex:(NSInteger)index;
+@optional
+/** 点击了某个view */
+-(void)cycleView:(SJCycleView *)cycleView didSelectViewAtIndex:(NSInteger)index;
+/** 正在展示某个view */
+-(void)cycleView:(SJCycleView *)cycleView didShowViewAtIndex:(NSInteger)index;
 @end
 @interface SJCycleView : UIView
 @property(nonatomic,weak)id<SJAdViewDelegate> delegate;
@@ -35,7 +37,7 @@ typedef NS_ENUM(NSInteger, KHScrollDirection){
 /** 底部分页栏的透明度 */
 @property (nonatomic, assign)  CGFloat alpha;
 /** 滚动的方向 */
-@property (nonatomic, assign)  KHScrollDirection direction;
+@property (nonatomic, assign)  SJScrollDirection direction;
 /** 隐藏底部分页栏的背景 */
 @property (nonatomic, assign)  BOOL hideBottomView;
 /** 隐藏底部分页栏 */
