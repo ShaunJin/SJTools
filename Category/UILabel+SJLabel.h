@@ -15,4 +15,6 @@
 +(instancetype)labelWithFontName:(NSString *)fontName color:(UIColor *)textColor size:(CGFloat)size;
 /** 根据text及指定宽度计算高度 */
 -(CGFloat)heightWithWidth:(CGFloat)width;
+/** 根据指定宽度自适应字号 */
+-(void)suitFontForWidth:(CGFloat)width;
 @end
