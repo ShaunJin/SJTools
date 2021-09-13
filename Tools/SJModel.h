@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SJModel : NSObject<NSCoding>
+@interface SJModel : NSObject<NSSecureCoding>
 /** 不归档的属性 */
 +(NSArray *)ignoredCodingPropertyNames;
 @end

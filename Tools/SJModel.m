@@ -40,6 +40,9 @@
     }
     return self;
 }
++ (BOOL)supportsSecureCoding{
+    return YES;
+}
 /** 不归档的属性 */
 +(NSArray *)ignoredCodingPropertyNames{
     return @[];
@@ -47,4 +50,5 @@
 +(NSDictionary *)replacedKeyFromPropertyName{
     return @{};
 }
+
 @end

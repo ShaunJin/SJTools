@@ -25,12 +25,10 @@
 /** 根据指定宽度自适应字号 */
 -(void)suitFontForWidth:(CGFloat)width{
     CGFloat textWidth = self.textWidth;
-    NSLog(@"textWidth = %f",textWidth);
     while (textWidth > width) {
         UIFont *font = [UIFont fontWithName:self.font.fontName size:self.font.pointSize - 1];
         self.font = font;
         textWidth = self.textWidth;
-        NSLog(@"textWidth = %f",textWidth);
     }
 }
 +(instancetype)labelWithFontName:(NSString *)fontName color:(UIColor *)textColor size:(CGFloat)size{

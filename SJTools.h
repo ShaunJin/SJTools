@@ -11,6 +11,7 @@
 
 #import "SJDefines.h"
 #import "SJFileManager.h"
+#import "SJDataManager.h"
 #import "NSArray+SJArray.h"
 #import "NSDate+SJDate.h"
 #import "NSDictionary+SJDictionary.h"
