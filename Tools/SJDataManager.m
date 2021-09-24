@@ -12,17 +12,12 @@
 +(void)save:(id<NSSecureCoding>)object identifier:(NSString *)identifier{
     if (object) {
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object requiringSecureCoding:YES error:nil];
-        NSLog(@"save data = %@",data);
         [kUserDefaults setObject:data forKey:identifier];
         [kUserDefaults synchronize];
     }else{
         [self deleteObjectWithIdentifier:identifier];
     }
 }
-///** 取，字符串、字典、数组等简单数据 */
-//+(id)getObjectWithIdentifier:(NSString *)identifier{
-//    return [self getObjectWithIdentifier:identifier useClass:[NSObject class]];
-//}
 /** 取，解码一个类 */
 +(id)getObjectWithIdentifier:(NSString *)identifier useClass:(Class)cls{
     NSData *data = [kUserDefaults objectForKey:identifier];

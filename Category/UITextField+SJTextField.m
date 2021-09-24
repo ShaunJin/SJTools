@@ -42,4 +42,15 @@ NSString * const SJTextFieldDidDeleteBackwardNotification = @"com.shajin.textfie
     textField.textColor = color;
     return textField;
 }
++(instancetype)textFieldWithTextColor:(UIColor *)color font:(UIFont *)font placeholder:(NSString *)placeholder placeholderColor:(UIColor *)placeholderColor{
+    UITextField *textField = [self new];
+    textField.font = font;
+    if (placeholder && placeholderColor) {
+        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: placeholderColor}];
+    }else if(placeholder){
+        textField.placeholder = placeholder;
+    }
+    textField.textColor = color;
+    return textField;
+}
 @end
