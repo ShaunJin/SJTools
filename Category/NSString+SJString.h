@@ -68,5 +68,9 @@ NSString * kAutoComplete(NSString *text, NSString *complete);
 -(NSString *)getProtocol;
 /** 判断自身是否符合正则 ,pattern是正则表达式*/
 -(BOOL)isMatchWithPattern:(NSString *)pattern;
+/** base64编码 */
+-(NSString *)base64Encode;
+/** base64解码 */
+-(NSString *)base64Dencode;
 @end
 NS_ASSUME_NONNULL_END

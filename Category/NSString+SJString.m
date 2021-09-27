@@ -279,4 +279,17 @@ NSString * kAutoComplete(NSString *text, NSString *complete){
     }
     return url;
 }
+/** base64编码 */
+-(NSString *)base64Encode{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *base64Data = [sData base64EncodedDataWithOptions:0];
+    NSString *baseString = [[NSString alloc]initWithData:base64Data encoding:NSUTF8StringEncoding];
+    return baseString;
+}
+/** base64解码 */
+-(NSString *)base64Dencode{
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:self options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSString *dataString = [[NSString alloc]initWithData:sData encoding:NSUTF8StringEncoding];
+    return dataString;
+}
 @end
