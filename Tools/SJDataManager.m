@@ -11,7 +11,13 @@
 /** 存 */
 +(void)save:(id<NSSecureCoding>)object identifier:(NSString *)identifier{
     if (object) {
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object requiringSecureCoding:YES error:nil];
+        NSData *data = nil;
+        if (@available(iOS 11.0, *)) {
+            data = [NSKeyedArchiver archivedDataWithRootObject:object requiringSecureCoding:YES error:nil];
+            
+        } else {
+            data = [NSKeyedArchiver archivedDataWithRootObject:object];
+        }
         [kUserDefaults setObject:data forKey:identifier];
         [kUserDefaults synchronize];
     }else{
@@ -22,8 +28,13 @@
 +(id)getObjectWithIdentifier:(NSString *)identifier useClass:(Class)cls{
     NSData *data = [kUserDefaults objectForKey:identifier];
     if (data) {
-        id object = [NSKeyedUnarchiver unarchivedObjectOfClass:cls fromData:data error:nil];
-        return object;
+        if (@available(iOS 11.0, *)) {
+            id object = [NSKeyedUnarchiver unarchivedObjectOfClass:cls fromData:data error:nil];
+            return object;
+        } else {
+            id object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            return object;
+        }
     }
     return nil;
 }
@@ -31,8 +42,13 @@
 +(id)getObjectWithIdentifier:(NSString *)identifier useClasses:(NSSet<Class> *)classes{
     NSData *data = [kUserDefaults objectForKey:identifier];
     if (data) {
-        id object = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:nil];
-        return object;
+        if (@available(iOS 11.0, *)) {
+            id object = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:nil];
+            return object;
+        } else {
+            id object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            return object;
+        }
     }
     
     return nil;

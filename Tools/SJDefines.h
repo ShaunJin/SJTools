@@ -8,6 +8,9 @@
 
 #ifndef SJDefines_h
 #define SJDefines_h
+
+#define USE_SDK  //引用第三方库使用<sdk/sdk.h>形式,否则使用"sdk.h"
+
 // 过期提醒
 #define kDeprecated(instead) API_DEPRECATED(instead, macosx(10.2,10.14), ios(2.0,2.0), watchos(2.0,5.0), tvos(9.0,12.0))
 /** 判断字符串是否为空 */

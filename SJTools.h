@@ -8,7 +8,9 @@
 
 #ifndef SJTools_h
 #define SJTools_h
-
+//-Wquoted-include-in-framework-header
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wquoted-include-in-framework-header"
 #import "SJDefines.h"
 #import "SJFileManager.h"
 #import "SJDataManager.h"
@@ -30,7 +32,15 @@
 #import "UIView+SJView.h"
 #import "UIViewController+SJViewController.h"
 #import "SJAlertController.h"
-
-
+#import "SJBaseViewController.h"
+#import "SJListViewController.h"
+#import "SJModel.h"
+#import "SJFloatintButton.h"
+#import "SJBackTextField.h"
+#import "SJDataBase.h"
+#import "SJDataBaseModel.h"
+#import "SJBaseAlertView.h"
+#import "SJShowImageView.h"
+#pragma clang diagnostic pop
 
 #endif /* SJTools_h */

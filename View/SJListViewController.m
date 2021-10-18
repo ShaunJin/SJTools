@@ -6,8 +6,14 @@
 //
 
 #import "SJListViewController.h"
+#ifdef USE_SDK
+#import <MJRefresh/MJRefresh.h>
+#import <SDAutoLayout/SDAutoLayout.h>
+#else
 #import "MJRefresh.h"
 #import "SDAutoLayout.h"
+#endif
+
 @interface SJListViewController ()
 @property(nonatomic,strong)dispatch_source_t list_timer;
 @end
