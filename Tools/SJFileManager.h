@@ -5,7 +5,7 @@
 //  Created by youwan on 2018/8/1.
 //  Copyright © 2018年 gzsm. All rights reserved.
 //
-
+// 存文件
 #import <Foundation/Foundation.h>
 
 @interface SJFileManager : NSObject
