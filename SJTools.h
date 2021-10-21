@@ -41,6 +41,8 @@
 #import "SJDataBaseModel.h"
 #import "SJBaseAlertView.h"
 #import "SJShowImageView.h"
+#import "SJTabBarController.h"
+#import "SJNavigationController.h"
 #pragma clang diagnostic pop
 
 #endif /* SJTools_h */

@@ -89,7 +89,7 @@
 #pragma mark- Getter
 /** 状态栏颜色 */
 - (UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 /** 隐藏导航栏底部细线 */
 -(BOOL)hiddenNaviLine{
