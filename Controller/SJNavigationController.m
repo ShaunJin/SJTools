@@ -24,7 +24,7 @@
     }else{
         viewController.hidesBottomBarWhenPushed = YES;
         //-- wait to deal ImgName
-        viewController.navigationItem.leftBarButtonItem = [self getBackBtnItemWithImgName:@"btn_back"];
+        viewController.navigationItem.leftBarButtonItem = [self getBackBarButtonItem];
         //         ------ 设置返回手势
         self.interactivePopGestureRecognizer.enabled = YES;
     }
@@ -79,6 +79,10 @@
     [self.navigationBar addSubview:self.line];
 }
 #pragma mark- Getter
+/** 获取返回按钮 */
+-(UIBarButtonItem *)getBackBarButtonItem{
+    return [self getBackBtnItemWithImgName:@"btn_back"];
+}
 -(UIView *)line{
     if (!_line) {
         _line = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationBar.frame.size.height - 0.5, self.navigationBar.frame.size.width, 0.5)];

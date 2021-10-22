@@ -13,4 +13,6 @@
 @property(nonatomic,assign)BOOL hiddenLine;
 /** 根据vc修改导航栏及状态栏样式 */
 -(void)changePreferenceWithViewController:(UIViewController *)viewController;
+/** 获取返回按钮 */
+-(UIBarButtonItem *)getBackBarButtonItem;
 @end
