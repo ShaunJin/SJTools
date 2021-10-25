@@ -43,6 +43,7 @@
 #import "SJShowImageView.h"
 #import "SJTabBarController.h"
 #import "SJNavigationController.h"
+#import "SJAppDelegate.h"
 #pragma clang diagnostic pop
 
 #endif /* SJTools_h */
