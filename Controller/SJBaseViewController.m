@@ -172,4 +172,10 @@
         [navigationController setNavigationBarHidden:[baseViewController hiddenNavigationBar] animated:YES];
     }
 }
+-(instancetype)init{
+    if (self = [super init]) {
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    return self;
+}
 @end
