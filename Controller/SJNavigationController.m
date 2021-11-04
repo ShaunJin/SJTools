@@ -49,10 +49,13 @@
     if ([viewController isKindOfClass:[SJBaseViewController class]]) {
         SJBaseViewController *vc = (SJBaseViewController *)viewController;
         self.navigationBarHidden = [vc hiddenNavigationBar];
+        self.hiddenLine = [vc hiddenNaviLine];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated"
         [[UIApplication sharedApplication] setStatusBarStyle:[vc preferredStatusBarStyle]];
 #pragma clang diagnostic pop
+    }else{
+        self.hiddenLine = YES;
     }
 }
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
