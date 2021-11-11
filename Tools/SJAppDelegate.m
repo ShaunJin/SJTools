@@ -51,7 +51,7 @@ static SJAppDelegate *app;
 #pragma mark- LifeCycle
 -(instancetype)init{
     if (self = [super init]) {
-        //
+        app = self;
     }
     return self;
 }
