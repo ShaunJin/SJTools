@@ -10,6 +10,8 @@
 @interface SJArchiver : NSObject
 /** 存/改 */
 +(void)saveData:(NSData *)data identifier:(NSString *)identifier;
+/** 存/改 */
++(void)save:(id<NSSecureCoding>)object identifier:(NSString *)identifier;
 /** 取 */
 +(NSData *)getDataWithIdentifier:(NSString *)identifier;
 /** 取，解码一个类 */

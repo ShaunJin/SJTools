@@ -95,7 +95,7 @@
     }
     return nil;
 }
-/** 存 */
+/** 存/改 */
 +(void)save:(id<NSSecureCoding>)object identifier:(NSString *)identifier{
     if (object) {
         NSData *data = nil;
