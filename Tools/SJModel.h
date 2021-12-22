@@ -2,7 +2,7 @@
 //  SJModel.h
 //  EMBase
 //
-//  Created by Air on 2021/4/12.
+//  Created by ShaJin on 2021/4/12.
 //
 // 所有model的基类
 #import <Foundation/Foundation.h>

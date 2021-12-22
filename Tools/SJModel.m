@@ -2,7 +2,7 @@
 //  SJModel.m
 //  EMBase
 //
-//  Created by Air on 2021/4/12.
+//  Created by ShaJin on 2021/4/12.
 //
 
 #import "SJModel.h"

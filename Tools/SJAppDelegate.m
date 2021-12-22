@@ -1,6 +1,6 @@
 //
 //  SJAppDelegate.m
-//  EMBase
+//  SJTools
 //
 //  Created by Air on 2021/10/25.
 //
