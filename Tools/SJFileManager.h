@@ -13,9 +13,9 @@
  * 如果修改的话可以继承这个类然后重写dataPath方法
  * 只需要传相对~/Document的路径
  */
-#import <Foundation/Foundation.h>
+#import "SJArchiver.h"
 
-@interface SJFileManager : NSObject
+@interface SJFileManager : SJArchiver
 /** 数据保存文件夹路径名称，默认路径是~/Document/data，如果要修改的话可以继承这个类然后重写这个方法 */
 +(NSString *)dataPath;
 @end
