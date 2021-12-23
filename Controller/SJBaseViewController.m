@@ -87,21 +87,24 @@
     return button;
 }
 #pragma mark- Getter
-/** 状态栏颜色 */
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleDefault;
-}
-/** 隐藏导航栏底部细线 */
--(BOOL)hiddenNaviLine{
-    return YES;
-}
+
+
+#pragma mark- 样式
 /** 隐藏导航栏 */
 -(BOOL)hiddenNavigationBar{
     return NO;
 }
-/** 标记该页面是否需要登录 */
--(BOOL)needLogin{
-    return NO;
+/** 导航栏颜色 */
+-(UIColor *)navigationBarColor{
+    return [UIColor whiteColor];
+}
+/** 导航栏标题颜色 */
+-(UIColor *)navigationTitleColor{
+    return [UIColor blackColor];
+}
+/** 状态栏样式*/
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 -(dispatch_source_t)timer{
     if (!_timer) {
@@ -131,7 +134,6 @@
     [self initUI];
     [self loadData];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

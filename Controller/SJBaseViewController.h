@@ -17,12 +17,6 @@
 -(void)loadNewData;
 /** 加载数据 */
 -(void)loadMoreData;
-/** 隐藏导航栏底部细线 */
--(BOOL)hiddenNaviLine;
-/** 隐藏导航栏 */
--(BOOL)hiddenNavigationBar;
-/** 标记该页面是否需要登录 */
--(BOOL)needLogin;
 /** 设置右侧按钮（文字形式）这两个方法只能用其中一个，一个以上按钮时须要用传统方法添加 */
 -(UIButton *)setRightItemWithTitle:(NSString *)title action:(SEL)action;
 /** 设置右侧按钮（图片形式）这两个方法只能用其中一个，一个以上按钮时须要用传统方法添加 */
@@ -37,4 +31,11 @@
 -(float)refreshDuration;
 /** 定时执行的方法 */
 -(void)timerMethod;
+#pragma mark- 样式
+/** 隐藏导航栏 */
+-(BOOL)hiddenNavigationBar;
+/** 导航栏颜色 */
+-(UIColor *)navigationBarColor;
+/** 导航栏标题颜色 */
+-(UIColor *)navigationTitleColor;
 @end
