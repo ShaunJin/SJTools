@@ -181,4 +181,13 @@
     CGRect rect = CGRectMake(_offsetX, _offsetY, _width, _width);
     return [self clippingWithRect:rect];
 }
+/** 转换成NSData */
+-(NSData *)toData{
+    NSData *data = nil;
+    data = UIImagePNGRepresentation(self);
+    if (!data) {
+        data = UIImageJPEGRepresentation(self,1.0);
+    }
+    return data;
+}
 @end

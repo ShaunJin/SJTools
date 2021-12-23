@@ -27,4 +27,6 @@
 -(UIImage *)clippingWithRect:(CGRect)rect;
 /* 以图片中心为中心，以最小边为边长，裁剪正方形图片 */
 -(UIImage *)clippingSquareImage;
+/** 转换成NSData */
+-(NSData *)toData;
 @end
