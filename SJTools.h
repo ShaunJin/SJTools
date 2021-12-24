@@ -44,6 +44,7 @@
 #import "SJTabBarController.h"
 #import "SJNavigationController.h"
 #import "SJAppDelegate.h"
+#import "NSMutableDictionary+SJDictionary.h"
 #pragma clang diagnostic pop
 
 #endif /* SJTools_h */

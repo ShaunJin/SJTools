@@ -6,7 +6,7 @@
 //
 // 存数据->NSUserDefaults，这里实现的是NSData数据的存取删，编解码由SJArchiver完成
 #import "SJArchiver.h"
-
+#define kUserDefaults [NSUserDefaults standardUserDefaults]
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SJDataManager : SJArchiver

@@ -46,7 +46,6 @@
 /** 根据vc修改导航栏及状态栏样式 */
 -(void)changePreferenceWithViewController:(UIViewController *)viewController{
     if ([viewController isKindOfClass:[SJBaseViewController class]]) {
-        NSLog(@"SJBaseViewController");
         SJBaseViewController *vc = (SJBaseViewController *)viewController;
         BOOL hiddenNavigationBar = [vc hiddenNavigationBar];
         self.navigationBarHidden = hiddenNavigationBar;

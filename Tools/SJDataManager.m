@@ -6,23 +6,23 @@
 //
 // 存数据->NSUserDefaults
 #import "SJDataManager.h"
-#define kUserDefaults [NSUserDefaults standardUserDefaults]
+
 @implementation SJDataManager
 /** 存/改 */
 +(void)saveData:(NSData *)data identifier:(NSString *)identifier{
     if (data) {
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:identifier];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [kUserDefaults setObject:data forKey:identifier];
+        [kUserDefaults synchronize];
     }else{
         [self deleteObjectWithIdentifier:identifier];
     }
 }
 /** 取 */
 +(NSData *)getDataWithIdentifier:(NSString *)identifier{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:identifier];;
+    return [kUserDefaults objectForKey:identifier];;
 }
 /** 删 */
 +(void)deleteObjectWithIdentifier:(NSString *)identifier{
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:identifier];
+    [kUserDefaults removeObjectForKey:identifier];
 }
 @end

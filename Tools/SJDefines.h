@@ -46,11 +46,12 @@
 #define kNaviBarHeight    44
 
 /** 字号 */
-#define kFontSize(fontSize) [UIFont fontWithName:kRegFont size:fontSize]
+#define kFontSize(fontName, fontSize) [UIFont fontWithName:fontName size:fontSize]
+
 /** 颜色 */
 #define Color(R, G, B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0]
 #define ColorA(r, g, b, a) ([UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a])
-
+#define rgba(r, g, b, a) [UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a]
 /** 16进制数值颜色 */ // 调用 ：HEXRGB(0XFFFFFF)
 #define HEXRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 /** 随机颜色 */
