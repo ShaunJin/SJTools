@@ -37,8 +37,7 @@
     }
 }
 #pragma mark- Setter
-/** 设置右侧按钮（文字形式） */
--(UIButton *)setRightItemWithTitle:(NSString *)title action:(SEL)action{
+-(UIBarButtonItem *)getBarButtonItemWithTitle:(NSString *)title action:(SEL)action{
     UIButton *button = [UIButton buttonWithType:0];
     button.frame = CGRectMake(0, 0, 70, 44);
     [button setTitle:title forState:UIControlStateNormal];
@@ -48,43 +47,40 @@
     button.titleLabel.font = [UIFont systemFontOfSize:16];
     button.titleEdgeInsets = UIEdgeInsetsMake(0, button.width - button.titleLabel.textWidth, 0,0);
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = buttonItem;
-    return button;
+    return buttonItem;
 }
-/** 设置右侧按钮（图片形式） */
--(UIButton *)setRightItemWithImage:(UIImage *)image action:(SEL)action{
+-(UIBarButtonItem *)getBarButtonItemWithImage:(UIImage *)image action:(SEL)action{
     UIButton *button = [UIButton buttonWithType:0];
     button.frame = CGRectMake(0, 0, 44, 44);
     [button setImage:image forState:UIControlStateNormal];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = buttonItem;
-//    self.navigationController.navigationItem.rightBarButtonItem = buttonItem;
-    return button;
+    return buttonItem;
 }
+/** 设置右侧按钮（文字形式） */
+-(UIButton *)setRightItemWithTitle:(NSString *)title action:(SEL)action{
+    UIBarButtonItem *buttonItem = [self getBarButtonItemWithTitle:title action:action];
+    self.navigationItem.rightBarButtonItem = buttonItem;
+    return (UIButton *)buttonItem.customView;
+}
+/** 设置右侧按钮（图片形式） */
+-(UIButton *)setRightItemWithImage:(UIImage *)image action:(SEL)action{
+    UIBarButtonItem *buttonItem = [self getBarButtonItemWithImage:image action:action];
+    self.navigationItem.rightBarButtonItem = buttonItem;
+    return (UIButton *)buttonItem.customView;
+}
+
 /** 设置左侧按钮（文字形式） */
 -(UIButton *)setLeftItemWithTitle:(NSString *)title action:(SEL)action{
-    UIButton *button = [UIButton buttonWithType:0];
-    button.frame = CGRectMake(0, 0, 70, 20);
-    [button setTitle:title forState:UIControlStateNormal];
-    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    [button setTitleColor:Color(36,135,234) forState:UIControlStateNormal];
-    [button setTitleColor:Color(85, 85, 85) forState:UIControlStateHighlighted];
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, button.width - button.titleLabel.textWidth, 0,0);
-    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *buttonItem = [self getBarButtonItemWithTitle:title action:action];
     self.navigationItem.leftBarButtonItem = buttonItem;
-    return button;
+    return (UIButton *)buttonItem.customView;
 }
 /** 设置左侧按钮（图片形式） */
 -(UIButton *)setLeftItemWithImage:(UIImage *)image action:(SEL)action{
-    UIButton *button = [UIButton buttonWithType:0];
-    button.frame = CGRectMake(0, 0, 20, 20);
-    [button setImage:image forState:UIControlStateNormal];
-    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *buttonItem = [self getBarButtonItemWithImage:image action:action];
     self.navigationItem.leftBarButtonItem = buttonItem;
-    return button;
+    return (UIButton *)buttonItem.customView;
 }
 #pragma mark- Getter
 

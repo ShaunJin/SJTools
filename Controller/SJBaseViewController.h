@@ -17,13 +17,13 @@
 -(void)loadNewData;
 /** 加载数据 */
 -(void)loadMoreData;
-/** 设置右侧按钮（文字形式）这两个方法只能用其中一个，一个以上按钮时须要用传统方法添加 */
+/** 设置右侧按钮（文字形式）这两个方法只能用其中一个，一个以上按钮时需要用传统方法添加 */
 -(UIButton *)setRightItemWithTitle:(NSString *)title action:(SEL)action;
-/** 设置右侧按钮（图片形式）这两个方法只能用其中一个，一个以上按钮时须要用传统方法添加 */
+/** 设置右侧按钮（图片形式）这两个方法只能用其中一个，一个以上按钮时需要用传统方法添加 */
 -(UIButton *)setRightItemWithImage:(UIImage *)image action:(SEL)action;
-/** 设置左侧按钮（文字形式）这两个方法只能用其中一个，一个以上按钮时须要用传统方法添加 */
+/** 设置左侧按钮（文字形式）这两个方法只能用其中一个，一个以上按钮时需要用传统方法添加 */
 -(UIButton *)setLeftItemWithTitle:(NSString *)title action:(SEL)action;
-/** 设置左侧按钮（图片形式）这两个方法只能用其中一个，一个以上按钮时须要用传统方法添加 */
+/** 设置左侧按钮（图片形式）这两个方法只能用其中一个，一个以上按钮时需要用传统方法添加 */
 -(UIButton *)setLeftItemWithImage:(UIImage *)image action:(SEL)action;
 /** POP回到指定的界面 */
 -(void)popToViewController:(NSString *)className;

@@ -9,12 +9,15 @@
 #import "SJNavigationController.h"
 #import "SJBaseViewController.h"
 #import "SJTabBarController.h"
-@interface SJNavigationController (){
+@interface SJNavigationController ()<UIGestureRecognizerDelegate>
 
-}
 @end
 
 @implementation SJNavigationController
+#pragma mark侧滑返回的手势代理实现
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer*)gestureRecognizer {
+    return self.viewControllers.count > 1;
+}
 #pragma mark- PUSH && POP
 /** push */
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -24,8 +27,6 @@
         viewController.hidesBottomBarWhenPushed = YES;
         //-- wait to deal ImgName
         viewController.navigationItem.leftBarButtonItem = [self getBackBarButtonItem];
-        //         ------ 设置返回手势
-        self.interactivePopGestureRecognizer.enabled = YES;
     }
     [self changePreferenceWithViewController:viewController];
     [super pushViewController:viewController animated:YES];
@@ -88,6 +89,7 @@
     bottomLine.hidden = YES;
     [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.shadowImage = [UIImage new];
+    self.interactivePopGestureRecognizer.delegate = self;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
