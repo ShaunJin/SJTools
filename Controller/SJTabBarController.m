@@ -13,6 +13,15 @@
 @end
 
 @implementation SJTabBarController
+//- (void)setupTabBar{
+//    UITabBar *tabBar = [UITabBar appearance];
+//    tabBar.barTintColor = kBackgroundColor;
+//    tabBar.backgroundImage = [UIImage new];
+//    tabBar.backgroundColor = [UIColor whiteColor];
+//    tabBar.shadowImage = [UIImage new];
+//    tabBar.tintColor = kThemeColor;
+//    tabBar.translucent = NO;
+//}
 #pragma mark- UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     self.title = viewController.title;
@@ -27,7 +36,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
 }
+
 -(void)addController:(UIViewController *)viewController title:(NSString *)title normolImage:(UIImage *)normalImage selectImage:(UIImage *)selectImage{
+    NSLog(@"title = %@",title);
+    viewController.title = title;
     viewController.tabBarItem.title = title;
     normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController.tabBarItem.image = normalImage;

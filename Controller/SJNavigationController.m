@@ -10,7 +10,7 @@
 #import "SJBaseViewController.h"
 #import "SJTabBarController.h"
 @interface SJNavigationController ()<UIGestureRecognizerDelegate>
-
+@property(nonatomic,strong)UIColor *currentBackgroundColor; // 当前导航栏背景颜色
 @end
 
 @implementation SJNavigationController
@@ -52,8 +52,12 @@
         self.navigationBarHidden = hiddenNavigationBar;
         // 隐藏导航栏时不用设置导航栏颜色
         if (!hiddenNavigationBar) {
-            [[UINavigationBar appearance] setBarTintColor:[vc navigationBarColor]];
-            [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[vc navigationTitleColor]}];
+            UIColor *color = [vc navigationBarColor];
+            if (!self.currentBackgroundColor || !isSameColor(self.currentBackgroundColor, color)) {
+                [self.navigationBar setBackgroundImage:[UIImage imageWithColor:[vc navigationBarColor] size:CGSizeMake(1, 1)] forBarMetrics:0];
+                self.currentBackgroundColor = color;
+            }
+            self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [vc navigationTitleColor]};
         }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated"

@@ -33,7 +33,7 @@
 }
 -(void)updateTitle{
     self.timeCount = self.timeCount - 1;
-    if (self.timeCount == 0) {
+    if (self.timeCount <= 0) {
         [self stop];
     }else{
         [self updateTitleWith:self.timeCount];
@@ -61,6 +61,7 @@
     return self;
 }
 - (void)dealloc{
+    NSLog(@"%@ : dealloc",NSStringFromClass([self class]));
     if (self.timer) {
         [self.timer invalidate];
         self.timer = nil;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#define kShowDisableTips [SJAlertController hintWarmlyWithMessage:@"暂不可用"]; \
+#define kShowDisableTips [SJAlertController hintWarmlyWithMessage:@"开发中"]; \
 NFLog(@"点击了未开放控件");
 #define kShowUnHandleTips [SJAlertController makeToast:@"未处理流程"]; \
 NFLog(@"未处理流程");
