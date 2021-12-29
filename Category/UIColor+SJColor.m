@@ -25,4 +25,18 @@
     const CGFloat *components = CGColorGetComponents(self.CGColor);
     return components[3];
 }
+/** 对比两个颜色的rgba值 */
+BOOL isSameColor(UIColor *aColor ,UIColor *bColor){
+    if ([aColor isKindOfClass:[UIColor class]] && [bColor isKindOfClass:[UIColor class]]) {
+        const CGFloat *aComponents = CGColorGetComponents(aColor.CGColor);
+        const CGFloat *bComponents = CGColorGetComponents(bColor.CGColor);
+        for (int i = 0; i < 4; i++) {
+            if (aComponents[i] != bComponents[i]) {
+                return NO;
+            }
+        }
+        return YES;
+    }
+    return NO;
+}
 @end

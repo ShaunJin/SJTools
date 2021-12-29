@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,readonly,assign)CGFloat g;
 @property(nonatomic,readonly,assign)CGFloat b;
 @property(nonatomic,readonly,assign)CGFloat a;
+/** 对比两个颜色的rgba值 */
+BOOL isSameColor(UIColor *aColor ,UIColor *bColor);
 @end
 
 NS_ASSUME_NONNULL_END
