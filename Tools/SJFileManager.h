@@ -18,4 +18,6 @@
 @interface SJFileManager : SJArchiver
 /** 数据保存文件夹路径名称，默认路径是~/Document/data，如果要修改的话可以继承这个类然后重写这个方法 */
 +(NSString *)dataPath;
+/** 检查目录是否存在，如果不存在就创建 */
++(NSError *)createDirectoryIfNotExistAtPath:(NSString *)path;
 @end
