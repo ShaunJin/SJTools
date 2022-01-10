@@ -72,5 +72,7 @@ NSString * kAutoComplete(NSString *text, NSString *complete);
 -(NSString *)base64Encode;
 /** base64解码 */
 -(NSString *)base64Dencode;
+/** 获取文件/url类型，即最后一个.(dot)之后的内容 */
+-(NSString *)getType;
 @end
 NS_ASSUME_NONNULL_END

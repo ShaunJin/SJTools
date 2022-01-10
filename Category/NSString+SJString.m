@@ -292,4 +292,15 @@ NSString * kAutoComplete(NSString *text, NSString *complete){
     NSString *dataString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     return dataString;
 }
+/** 获取文件/url类型，即最后一个.(dot)之后的内容 */
+-(NSString *)getType{
+//    NSRange range = [self rangeOfString:@"."];
+    NSArray *array = [self componentsSeparatedByString:@"/"];
+    NSString *fileName = array.lastObject;
+    NSArray *arr = [fileName componentsSeparatedByString:@"."];
+    if (arr.count == 2) { // 正确情况下应该只有一个.(dot)，所以应该分成两部分
+        return arr[1];
+    }
+    return nil;
+}
 @end
