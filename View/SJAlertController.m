@@ -95,7 +95,8 @@
 }
 /** 在指定页面创建弹窗创建弹窗 */
 +(void)makeAlertWithTitle:(NSString *)title message:(NSString *)message blockList:(NSArray *)blockList titleList:(NSArray *)titleList onViewController:(UIViewController *)viewController{
-    SJAlertController *alertController = [SJAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    NSString *msg = [NSString stringWithFormat:@"%@",message];
+    SJAlertController *alertController = [SJAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
     for (int i = 0; i < titleList.count; i++) {
         NSString *actionTitle = titleList[i];
         UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
