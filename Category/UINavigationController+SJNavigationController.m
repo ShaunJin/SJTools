@@ -66,7 +66,18 @@
         NSAssert(0, @"未获取到导航控制器");
         return nil;
     }
-    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *rootViewController = nil;
+    if (@available(iOS 13.0, *)) {
+        NSArray *windows = [UIApplication sharedApplication].windows;
+        for (UIWindow *window in windows) {
+            if (window.isKeyWindow) {
+                rootViewController = window.rootViewController;
+                break;
+            }
+        }
+    }else{
+        rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    }
     return [self getCurrentNavigationControllerFrom:rootViewController];
 }
 //递归

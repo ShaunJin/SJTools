@@ -38,4 +38,9 @@
 -(UIColor *)navigationBarColor;
 /** 导航栏标题颜色 */
 -(UIColor *)navigationTitleColor;
+/** 导航栏标题字体 */
+-(UIFont *)navigationTitleFont;
+/** 是否是纯色背景导航栏 */
+-(BOOL)isClearNavigationBar;
+
 @end

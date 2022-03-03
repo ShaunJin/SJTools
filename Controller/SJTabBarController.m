@@ -13,22 +13,13 @@
 @end
 
 @implementation SJTabBarController
-//- (void)setupTabBar{
-//    UITabBar *tabBar = [UITabBar appearance];
-//    tabBar.barTintColor = kBackgroundColor;
-//    tabBar.backgroundImage = [UIImage new];
-//    tabBar.backgroundColor = [UIColor whiteColor];
-//    tabBar.shadowImage = [UIImage new];
-//    tabBar.tintColor = kThemeColor;
-//    tabBar.translucent = NO;
-//}
 #pragma mark- UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    self.title = viewController.title;
-    if ([self.navigationController isKindOfClass:[SJNavigationController class]]) {
-        SJNavigationController *navi = (SJNavigationController *)self.navigationController;
-        [navi changePreferenceWithViewController:viewController];
-    }
+//    self.title = viewController.title;
+//    if ([self.navigationController isKindOfClass:[SJNavigationController class]]) {
+//        SJNavigationController *navi = (SJNavigationController *)self.navigationController;
+//        [navi changePreferenceWithViewController:viewController];
+//    }
 }
 #pragma mark- LifeCycle
 - (void)viewDidLoad {
@@ -38,7 +29,10 @@
 }
 
 -(void)addController:(UIViewController *)viewController title:(NSString *)title normolImage:(UIImage *)normalImage selectImage:(UIImage *)selectImage{
-    NSLog(@"title = %@",title);
+    if (!viewController) {
+        viewController = [UIViewController new];
+        viewController.view.backgroundColor = RandomColor;
+    }
     viewController.title = title;
     viewController.tabBarItem.title = title;
     normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -61,4 +55,40 @@
 -(void) viewDidDisappear:(BOOL)animated{
     [self.selectedViewController endAppearanceTransition];
 }
+
+
+///**
+// *  设置所有UITabBar
+// */
+//- (void)setupTabBar{
+//    UITabBar *tabBar = [UITabBar appearance];
+//    tabBar.barTintColor = [UIColor whiteColor];
+//    tabBar.backgroundImage = [UIImage new];
+//    tabBar.backgroundColor = [UIColor whiteColor];
+//    tabBar.shadowImage = [UIImage new];
+//    tabBar.tintColor = kThemeColor;
+//    tabBar.translucent = NO;
+//    [self dropShadowWithOffset:CGSizeMake(0, -2.5) radius:2 color:kShadowColor opacity:0.2];
+//}
+//
+//- (void)dropShadowWithOffset:(CGSize)offset
+//                      radius:(CGFloat)radius
+//                       color:(UIColor *)color
+//                     opacity:(CGFloat)opacity {
+//
+//    // Creating shadow path for better performance
+//    CGMutablePathRef path = CGPathCreateMutable();
+//    CGPathAddRect(path, NULL, self.tabBar.bounds);
+//    self.tabBar.layer.shadowPath = path;
+//    CGPathCloseSubpath(path);
+//    CGPathRelease(path);
+//
+//    self.tabBar.layer.shadowColor = color.CGColor;
+//    self.tabBar.layer.shadowOffset = offset;
+//    self.tabBar.layer.shadowRadius = radius;
+//    self.tabBar.layer.shadowOpacity = opacity;
+//
+//    // Default clipsToBounds is YES, will clip off the shadow, so we disable it.
+//    self.tabBar.clipsToBounds = NO;
+//}
 @end

@@ -19,13 +19,13 @@
 
 }
 -(void)loadData{
-    
+
 }
 -(void)loadNewData{
-    
+
 }
 -(void)loadMoreData{
-    
+
 }
 /** POP回到指定的界面 */
 -(void)popToViewController:(NSString *)className{
@@ -98,10 +98,19 @@
 -(UIColor *)navigationTitleColor{
     return [UIColor blackColor];
 }
+/** 导航栏标题字体 */
+-(UIFont *)navigationTitleFont{
+    return kFontSize(kRegFont, 20);
+}
 /** 状态栏样式*/
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleDefault;
 }
+/** 是否是纯色背景导航栏 */
+-(BOOL)isClearNavigationBar{
+    return NO;
+}
+
 -(dispatch_source_t)timer{
     if (!_timer) {
         dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
@@ -120,7 +129,7 @@
 }
 /** 定时执行的方法 */
 -(void)timerMethod{
-    
+
 }
 #pragma mark- LifeCycle
 - (void)viewDidLoad {
@@ -143,7 +152,7 @@
 //这里是弃用的属性
     self.automaticallyAdjustsScrollViewInsets = NO;
 #pragma clang diagnostic pop
-    
+
     if ([self refreshDuration] > 0) {
         kWeakSelf;
         dispatch_source_set_event_handler(self.timer, ^{
@@ -162,13 +171,13 @@
 // 将要显示控制器
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 判断要显示的控制器是否是自己
-    BOOL isSelf = [viewController isKindOfClass:[self class]];
-    if (isSelf){
-        [navigationController setNavigationBarHidden:(isSelf && [self hiddenNavigationBar]) animated:YES];
-    }else if ([viewController isKindOfClass:[SJBaseViewController class]]){
-        SJBaseViewController *baseViewController = (SJBaseViewController *)viewController;
-        [navigationController setNavigationBarHidden:[baseViewController hiddenNavigationBar] animated:YES];
-    }
+//    BOOL isSelf = [viewController isKindOfClass:[self class]];
+//    if (isSelf){
+//        [navigationController setNavigationBarHidden:(isSelf && [self hiddenNavigationBar]) animated:YES];
+//    }else if ([viewController isKindOfClass:[SJBaseViewController class]]){
+//        SJBaseViewController *baseViewController = (SJBaseViewController *)viewController;
+//        [navigationController setNavigationBarHidden:[baseViewController hiddenNavigationBar] animated:YES];
+//    }
 }
 -(instancetype)init{
     if (self = [super init]) {
