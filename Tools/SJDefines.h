@@ -10,7 +10,6 @@
 #define SJDefines_h
 
 #define USE_SDK  //引用第三方库使用<sdk/sdk.h>形式,否则使用"sdk.h"
-
 // 过期提醒
 #define kDeprecated(instead) API_DEPRECATED(instead, macosx(10.2,10.14), ios(2.0,2.0), watchos(2.0,5.0), tvos(9.0,12.0))
 /** 判断字符串是否为空 */
@@ -22,21 +21,9 @@
 /** 加载本地图片 */
 #define LoadImage(imageName) [UIImage imageNamed:imageName]
 
-/** 判断系统版本是否大于某（含）版本 */
-#define IsLaterVersion(version) (([[[UIDevice currentDevice] systemVersion] floatValue] >= version)? (YES):(NO))
-#define IOS_VERSION_9_OR_LATER IsLaterVersion(9.0)
-
-#ifdef IOS_VERSION_9_OR_LATER
-
 #define kRegFont             @"PingFangSC-Regular"
 #define kMedFont             @"PingFangSC-Medium"
 #define kSemFont             @"PingFangSC-Semibold"
-#else
-
-#define kRegFont             @"HelveticaNeue-Thin"
-#define kMedFont             @"HelveticaNeue-Medium"
-
-#endif
 
 /** 屏幕宽高*/
 #define kWidth [UIScreen mainScreen].bounds.size.width
@@ -57,8 +44,7 @@
 /** 随机颜色 */
 #define RandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
 
-/** keyWindow */
-#define kMainWindow  [UIApplication sharedApplication].keyWindow
+
 #define kSafeAreaBottom ({\
     CGFloat tmp = 0;\
     if (@available(iOS 11.0, *)) {\
@@ -73,6 +59,8 @@
     }\
     tmp;\
 })
+/** keyWindow */
+#define kMainWindow  [UIApplication sharedApplication].keyWindow
 /** 根视图 */
 #define kRootViewController [UIApplication sharedApplication].keyWindow.rootViewController
 /** 快速声明block */

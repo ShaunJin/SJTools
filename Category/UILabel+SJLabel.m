@@ -20,7 +20,7 @@
 }
 /** 创建label */
 +(instancetype)labelWithTextColor:(UIColor *)textColor size:(CGFloat)size{
-    return [self labelWithFontName:kMedFont color:textColor size:size];
+    return [self labelWithFont:kFontSize(kMedFont, size) textColor:textColor];
 }
 /** 根据指定宽度自适应字号 */
 -(void)suitFontForWidth:(CGFloat)width{
@@ -35,6 +35,12 @@
     UILabel *label = [[self alloc] init];
     label.textColor = textColor;
     label.font = [UIFont fontWithName:fontName size:size];
+    return label;
+}
++(instancetype)labelWithFont:(UIFont *)font textColor:(UIColor *)textColor{
+    UILabel *label = [[self alloc] init];
+    label.textColor = textColor;
+    label.font = font;
     return label;
 }
 @end

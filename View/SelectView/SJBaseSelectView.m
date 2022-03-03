@@ -72,7 +72,7 @@
 }
 -(UILabel *)titleLabel{
     if (!_titleLabel) {
-        _titleLabel = [UILabel labelWithFontName:kRegFont color:Color(53, 54, 62) size:16];
+        _titleLabel = [UILabel labelWithFont:kFontSize(kRegFont, 16) textColor:Color(53, 54, 62)];
         [self addSubview:_titleLabel];
     }
     return _titleLabel;
