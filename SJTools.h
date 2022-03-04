@@ -45,6 +45,7 @@
 #import "SJNavigationController.h"
 #import "SJAppDelegate.h"
 #import "NSMutableDictionary+SJDictionary.h"
+#import "SJCollectionViewCell.h"
 #pragma clang diagnostic pop
 
 #endif /* SJTools_h */
