@@ -21,6 +21,7 @@ typedef void (^SJCompleteBlock)(SJResponse * response);
 typedef void (^SJSuccessBlock)(BOOL success);
 
 @interface SJRequest : AFHTTPSessionManager
+
 @property(nonatomic,strong)NSString *uri;
 @property(nonatomic,assign)SJHttpMethod method;
 @property(nonatomic,strong,readonly)NSDictionary *requestData; // 请求数据
@@ -32,6 +33,12 @@ typedef void (^SJSuccessBlock)(BOOL success);
 @property(nonatomic,copy)SJCompleteBlock completeBlock;
 /** 初始化 */
 +(instancetype)requestWithUri:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
+/** get */
++(instancetype)get:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
+/** 下载用 */
++(instancetype)httpGet:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
+/** post */
++(instancetype)post:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
 -(instancetype)initWithUri:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
 -(BOOL)addValue:(id<NSCoding>)value forKey:(NSString *)key;
 -(void)go;

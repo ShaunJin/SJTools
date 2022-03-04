@@ -125,6 +125,23 @@ static AFNetworkReachabilityStatus networkStatus = AFNetworkReachabilityStatusUn
 +(instancetype)requestWithUri:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock{
     return [[[self class] alloc] initWithUri:uri completeBlock:completeBlock];
 }
++(instancetype)get:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock{
+    SJRequest *r = [self requestWithUri:uri completeBlock:completeBlock];
+    r.method = kHttpGet;
+    return r;
+}
++(instancetype)httpGet:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock{
+    SJRequest *r = [self requestWithUri:uri completeBlock:completeBlock];
+    r.responseSerializer =  [AFHTTPResponseSerializer serializer];
+    r.method = kHttpGet;
+    return r;
+}
++(instancetype)post:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock{
+    SJRequest *r = [self requestWithUri:uri completeBlock:completeBlock];
+    r.method = kHttpPost;
+    return r;
+}
+
 -(instancetype)initWithUri:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock{
     if (self = [super init]) {
         self.uri = uri;
