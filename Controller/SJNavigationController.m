@@ -28,11 +28,11 @@
         //-- wait to deal ImgName
 //        viewController.navigationItem.leftBarButtonItem = [self getBackBarButtonItem];
     }
-//    [self changePreferenceWithViewController:viewController];
+    [self changePreferenceWithViewController:viewController];
 //    NSLog(@"pushViewController");
     [super pushViewController:viewController animated:YES];
 }
-///** pop */
+/** pop */
 //- (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated{
 //    if (self.viewControllers.count == 2) {
 //        UIViewController *rootVC = self.viewControllers.firstObject;
@@ -47,58 +47,59 @@
 #pragma mark- CustomMethod
 /** 根据vc修改导航栏及状态栏样式 */
 -(void)changePreferenceWithViewController:(UIViewController *)viewController{
-    if ([viewController isKindOfClass:[SJBaseViewController class]]) {
-        SJBaseViewController *vc = (SJBaseViewController *)viewController;
-        BOOL isClearNavigationBar = [vc isClearNavigationBar];
-        NSDictionary *attr = @{
-            NSForegroundColorAttributeName: [vc navigationTitleColor],
-            NSFontAttributeName: [vc navigationTitleFont],
-        };
-        self.navigationBarHidden = [vc hiddenNavigationBar];
-        if (@available(iOS 15.0, *)) {
-            if (isClearNavigationBar) {
-                UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
-                barApp.backgroundColor = [UIColor clearColor];
-                #//基于backgroundColor或backgroundImage的磨砂效果
-                barApp.backgroundEffect = nil;
-                #//阴影颜色（底部分割线），当shadowImage为nil时，直接使用此颜色为阴影色。如果此属性为nil或clearColor（需要显式设置），则不显示阴影。
-                barApp.shadowColor = nil;
-                //标题文字颜色
-                barApp.titleTextAttributes = attr;
-                self.navigationBar.scrollEdgeAppearance = nil;
-                self.navigationBar.standardAppearance = barApp;
-            }else{
-                UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
-                barApp.backgroundColor = [vc navigationBarColor];
-                #//基于backgroundColor或backgroundImage的磨砂效果
-                barApp.backgroundEffect = nil;
-                #//阴影颜色（底部分割线），当shadowImage为nil时，直接使用此颜色为阴影色。如果此属性为nil或clearColor（需要显式设置），则不显示阴影。
-                barApp.shadowColor = nil;
-                //标题文字颜色
-                barApp.titleTextAttributes = attr;
-                self.navigationBar.scrollEdgeAppearance = barApp;
-                self.navigationBar.standardAppearance = barApp;
-            }
-            
-        }else{
-            self.navigationBar.titleTextAttributes = attr;
-            UIImage *navBgImg = [UIImage imageWithColor:ColorA(255, 255, 255, isClearNavigationBar ? 0.0f : 1.0f) size:CGSizeMake(kWidth, 44.f)];
-            [self.navigationBar setBackgroundImage:navBgImg forBarMetrics:UIBarMetricsDefault];
-//            UIImageView *bottomLine = [self findHairlineImageViewUnder:self.navigationBar];
-//            bottomLine.hidden = YES;
-        }
-        if (isClearNavigationBar) {
-            //透明设置
-            self.navigationController.navigationBar.translucent = YES;
-            //navigationItem控件的颜色
-            self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        }else{
-            //透明设置
-            self.navigationController.navigationBar.translucent = NO;
-            //navigationItem控件的颜色
-            self.navigationController.navigationBar.tintColor = [vc navigationTitleColor];
-        }
-    }
+//    return;
+//    if ([viewController isKindOfClass:[SJBaseViewController class]]) {
+//        SJBaseViewController *vc = (SJBaseViewController *)viewController;
+//        BOOL isClearNavigationBar = [vc isClearNavigationBar];
+//        NSDictionary *attr = @{
+//            NSForegroundColorAttributeName: [vc navigationTitleColor],
+//            NSFontAttributeName: [vc navigationTitleFont],
+//        };
+//        self.navigationBarHidden = [vc hiddenNavigationBar];
+//        if (@available(iOS 15.0, *)) {
+//            if (isClearNavigationBar) {
+//                UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+//                barApp.backgroundColor = [UIColor clearColor];
+//                #//基于backgroundColor或backgroundImage的磨砂效果
+//                barApp.backgroundEffect = nil;
+//                #//阴影颜色（底部分割线），当shadowImage为nil时，直接使用此颜色为阴影色。如果此属性为nil或clearColor（需要显式设置），则不显示阴影。
+//                barApp.shadowColor = nil;
+//                //标题文字颜色
+//                barApp.titleTextAttributes = attr;
+//                self.navigationBar.scrollEdgeAppearance = nil;
+//                self.navigationBar.standardAppearance = barApp;
+//            }else{
+//                UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+//                barApp.backgroundColor = [vc navigationBarColor];
+//                #//基于backgroundColor或backgroundImage的磨砂效果
+//                barApp.backgroundEffect = nil;
+//                #//阴影颜色（底部分割线），当shadowImage为nil时，直接使用此颜色为阴影色。如果此属性为nil或clearColor（需要显式设置），则不显示阴影。
+//                barApp.shadowColor = nil;
+//                //标题文字颜色
+//                barApp.titleTextAttributes = attr;
+//                self.navigationBar.scrollEdgeAppearance = barApp;
+//                self.navigationBar.standardAppearance = barApp;
+//            }
+//
+//        }else{
+//            self.navigationBar.titleTextAttributes = attr;
+//            UIImage *navBgImg = [UIImage imageWithColor:ColorA(255, 255, 255, isClearNavigationBar ? 0.0f : 1.0f) size:CGSizeMake(kWidth, 44.f)];
+//            [self.navigationBar setBackgroundImage:navBgImg forBarMetrics:UIBarMetricsDefault];
+////            UIImageView *bottomLine = [self findHairlineImageViewUnder:self.navigationBar];
+////            bottomLine.hidden = YES;
+//        }
+//        if (isClearNavigationBar) {
+//            //透明设置
+//            self.navigationController.navigationBar.translucent = YES;
+//            //navigationItem控件的颜色
+//            self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//        }else{
+//            //透明设置
+//            self.navigationController.navigationBar.translucent = NO;
+//            //navigationItem控件的颜色
+//            self.navigationController.navigationBar.tintColor = [vc navigationTitleColor];
+//        }
+//    }
 }
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
     if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
@@ -120,12 +121,12 @@
     return [self getBackBtnItemWithImgName:@"btn_back"];
 }
 #pragma mark- LifeCycle
-//-(instancetype)initWithRootViewController:(UIViewController *)rootViewController{
-//    if (self = [super initWithRootViewController:rootViewController]) {
-//        [self changePreferenceWithViewController:rootViewController];
-//    }
-//    return self;
-//}
+-(instancetype)initWithRootViewController:(UIViewController *)rootViewController{
+    if (self = [super initWithRootViewController:rootViewController]) {
+        [self changePreferenceWithViewController:rootViewController];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    NSLog(@"viewDidLoad");

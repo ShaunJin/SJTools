@@ -38,9 +38,11 @@
         [context evaluatePolicy:policy localizedReason:tips reply:^(BOOL success, NSError * _Nullable error) {
             if (success) {
                 // 认证成功
-                if (successBlock) {
-                    successBlock();
-                }
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    if (successBlock) {
+                        successBlock();
+                    }
+                }];
             }else{
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     if (failureBlock) {

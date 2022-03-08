@@ -13,6 +13,7 @@
 //    Method viewDidAppear = class_getInstanceMethod(self, @selector(viewDidAppear:));
 //    Method customViewDidAppear = class_getInstanceMethod(self, @selector(customViewDidAppear:));
 //    method_exchangeImplementations(viewDidAppear, customViewDidAppear);
+    
     Method viewWillAppear = class_getInstanceMethod(self, @selector(viewWillAppear:));
     Method customViewWillAppear = class_getInstanceMethod(self, @selector(customViewWillAppear:));
     method_exchangeImplementations(viewWillAppear, customViewWillAppear);
