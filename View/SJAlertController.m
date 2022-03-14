@@ -39,7 +39,7 @@
     [UIView animateWithDuration:0.25 animations:^{
         toastView.top = kSafeAreaTop;
     }];
-    [NSObject actionWithDelay:2 action:^{
+    [SJDispatch afterDelay:2 action:^{
         [UIView animateWithDuration:0.25 animations:^{
             toastView.bottom = 0;
         }];

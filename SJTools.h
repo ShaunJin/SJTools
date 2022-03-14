@@ -46,6 +46,7 @@
 #import "SJAppDelegate.h"
 #import "NSMutableDictionary+SJDictionary.h"
 #import "SJCollectionViewCell.h"
+#import "SJDispatch.h"
 #pragma clang diagnostic pop
 
 #endif /* SJTools_h */

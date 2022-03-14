@@ -22,11 +22,11 @@
 /** 发送一个通知 */
 +(void)postNotificationWithName:(NSString *)noticationName;
 /** 在主线程执行的任务 */
-+(void)actionWithMainQueue:(dispatch_block_t)action;
++(void)actionWithMainQueue:(dispatch_block_t)action kDeprecated("已废弃,请使用SJDispatch的方法");
 /** 在多线程执行的任务 */
-+(void)actionWithGlobalQueue:(dispatch_block_t)action;
++(void)actionWithGlobalQueue:(dispatch_block_t)action kDeprecated("已废弃,请使用SJDispatch的方法");
 /** 延时执行的任务 */
-+(void)actionWithDelay:(float)delay action:(dispatch_block_t)action;
++(void)actionWithDelay:(float)delay action:(dispatch_block_t)action kDeprecated("已废弃,请使用SJDispatch的方法");
 /** 判断对象是否是数组 */
 -(BOOL)isArray;
 /** 获取属性名数组 */
