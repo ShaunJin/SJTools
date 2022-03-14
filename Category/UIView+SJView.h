@@ -33,4 +33,6 @@
 @property(nonatomic,assign)CGFloat radius;
 /** 返回frame的参数 */
 +(NSString *)frameDescription:(CGRect)frame;
+/** 设置圆角 */
+-(void)setCorner:(UIRectCorner)corner cornerRadii:(CGSize)size;
 @end

@@ -64,6 +64,13 @@
     self.layer.cornerRadius = radius;
     self.layer.masksToBounds = YES;
 }
+-(void)setCorner:(UIRectCorner)corner cornerRadii:(CGSize)size{
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(8, 8)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
+}
 #pragma mark- Getter
 -(CGFloat)top{
     return CGRectGetMinY(self.frame);
