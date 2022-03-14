@@ -15,7 +15,7 @@
 #pragma mark- CustomMethod
 -(void)initUI{
     self.animationType = kAnimationBottom;
-    self.cornerRadius = 0;
+    self.radius = 0.0;
     UIRectCorner corner = UIRectCornerTopLeft | UIRectCornerTopRight;
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(14, 14)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
