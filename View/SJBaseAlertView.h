@@ -17,7 +17,7 @@ typedef enum : NSUInteger {
 /** 点击菜单外消失  Default is YES */
 @property(nonatomic,assign)BOOL dismissOnTouchOutside;
 /** 圆角半径 Default is 5.0 */
-@property(nonatomic,assign)CGFloat cornerRadius;
+@property(nonatomic,assign)CGFloat cornerRadius kDeprecated("直接使用UIView的radius方法");
 /** 是否显示阴影 Default is YES */
 @property(nonatomic,assign,getter=isShadowShowing) BOOL isShowShadow;
 /** 出现方式 Default is kAnimationCenter */

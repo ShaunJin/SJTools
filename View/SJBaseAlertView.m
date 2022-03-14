@@ -16,7 +16,7 @@
 #pragma mark- CustomMethod
 - (void)setDefaultSettings{
     self.dismissOnTouchOutside = YES;
-    self.cornerRadius = 5.0;
+    self.radius = 5.0;
     self.isShowShadow = YES;
     // 背景色
     self.backgroundColor = [UIColor whiteColor];
@@ -81,12 +81,6 @@
     }
 }
 #pragma mark- Setter
--(void)setCornerRadius:(CGFloat)cornerRadius{
-    if (cornerRadius >= 0) {
-        self.radius = cornerRadius;
-        _cornerRadius = cornerRadius;
-    }
-}
 - (void)setIsShowShadow:(BOOL)isShowShadow{
     _isShowShadow = isShowShadow;
     self.layer.shadowOpacity = isShowShadow ? 0.5 : 0;

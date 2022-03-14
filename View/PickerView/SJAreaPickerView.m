@@ -230,7 +230,7 @@
 -(instancetype)initWithProvince:(NSString *)province city:(NSString *)city area:(NSString *)area completeBlock:(void(^)(NSString *province, NSString *city, NSString *area))completeBlock{
     if (self = [super initWithFrame:CGRectMake(0, kHeight - kSafeAreaBottom - 300, kWidth, 300 + kSafeAreaBottom)]) {
         self.animationType = kAnimationBottom;
-        self.cornerRadius = 0.0;
+        self.radius = 0.0;
         self.completeBlock = completeBlock;
         self.defaultProvince = province;
         self.defaultCity = city;
