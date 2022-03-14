@@ -24,6 +24,7 @@
         if ([self isKindOfClass:[SJBaseViewController class]]) {
             SJBaseViewController *vc = (SJBaseViewController *)self;
             BOOL isClearNavigationBar = [vc isClearNavigationBar];
+
             NSDictionary *attr = @{
                 NSForegroundColorAttributeName: [vc navigationTitleColor],
                 NSFontAttributeName: [vc navigationTitleFont],
@@ -55,26 +56,24 @@
                 }
                 
             }else{
-                NSLog(@"ios 15---");
                 self.navigationController.navigationBar.titleTextAttributes = attr;
-                UIImage *navBgImg = [UIImage imageWithColor:ColorA(255, 255, 255, isClearNavigationBar ? 0.0f : 1.0f) size:CGSizeMake(kWidth, 44.f)];
+//                UIImage *navBgImg = [UIImage imageWithColor:ColorA(255, 255, 255, isClearNavigationBar ? 0.0f : 1.0f) size:CGSizeMake(kWidth, 44.f)];
+                // 导航栏颜色
+                UIImage *navBgImg = [UIImage imageWithColor:[vc navigationBarColor] size:CGSizeMake(kWidth, 44)];
                 [self.navigationController.navigationBar setBackgroundImage:navBgImg forBarMetrics:UIBarMetricsDefault];
                 UIImageView *bottomLine = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
                 bottomLine.hidden = YES;
             }
             if (isClearNavigationBar) {
-                NSLog(@"isClearNavigationBar1111");
                 //透明设置
                 self.navigationController.navigationBar.translucent = YES;
                 //navigationItem控件的颜色
-                self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+                    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
             }else{
-                NSLog(@"isClearNavigationBar2222");
                 //透明设置
                 self.navigationController.navigationBar.translucent = NO;
                 //navigationItem控件的颜色
                 self.navigationController.navigationBar.tintColor = [vc navigationTitleColor];
-                self.navigationController.navigationBar.backgroundColor = [vc navigationBarColor];
             }
         }
     }

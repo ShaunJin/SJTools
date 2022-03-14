@@ -14,6 +14,9 @@
 @end
 
 @implementation SJNavigationController
+-(UIViewController *)childViewControllerForStatusBarStyle{
+    return self.topViewController;
+}
 #pragma mark侧滑返回的手势代理实现
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer*)gestureRecognizer {
     return self.viewControllers.count > 1;
@@ -118,7 +121,7 @@
 #pragma mark- Getter
 /** 获取返回按钮 */
 -(UIBarButtonItem *)getBackBarButtonItem{
-    return [self getBackBtnItemWithImgName:@"btn_back"];
+    return [self getBackBtnItemWithImgName:@"em_icon_back"];
 }
 #pragma mark- LifeCycle
 -(instancetype)initWithRootViewController:(UIViewController *)rootViewController{
