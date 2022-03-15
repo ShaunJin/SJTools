@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+SJImage.h"
-#import <objc/runtime.h>
+//#import <objc/runtime.h>
 @implementation UIImage (SJImage)
 + (UIImage*)greyImageWithImage:(UIImage*)image{
     //根据设备的屏幕缩放比例调整生成图片的尺寸，避免在图片变糊
