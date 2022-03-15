@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UITableView (SJTableView)
-@property(nonatomic,strong)UIView *defaultPage;
 
 /** 批量注册CellClass{identifier:cellClassName} */
 -(void)registerClass:(NSDictionary *)dict;

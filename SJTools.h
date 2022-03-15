@@ -27,6 +27,7 @@
 #import "UILabel+SJLabel.h"
 #import "UINavigationController+SJNavigationController.h"
 #import "UITableView+SJTableView.h"
+#import "UIScrollView+SJScrollView.h"
 #import "UITextField+SJTextField.h"
 #import "UIView+i7Rotate360.h"
 #import "UIView+SJView.h"
@@ -47,6 +48,7 @@
 #import "NSMutableDictionary+SJDictionary.h"
 #import "SJCollectionViewCell.h"
 #import "SJDispatch.h"
+
 #pragma clang diagnostic pop
 
 #endif /* SJTools_h */
