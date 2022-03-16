@@ -35,4 +35,6 @@
 +(NSString *)frameDescription:(CGRect)frame;
 /** 设置圆角 */
 -(void)setCorner:(UIRectCorner)corner cornerRadii:(CGSize)size;
+/** 添加阴影 */
+- (void)dropShadowWithOffset:(CGSize)offset radius:(CGFloat)radius color:(UIColor *)color opacity:(CGFloat)opacity;
 @end

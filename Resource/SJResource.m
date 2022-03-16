@@ -29,7 +29,6 @@ static SJResource *instance = nil;
     if (!path) {
         path = [bundle pathForResource:imageName ofType:@"png"];
     }
-    NSLog(@"path = %@",path);
     return [UIImage imageWithContentsOfFile:path];
 }
 #pragma mark- LifeCycle
