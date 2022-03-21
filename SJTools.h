@@ -48,6 +48,7 @@
 #import "NSMutableDictionary+SJDictionary.h"
 #import "SJCollectionViewCell.h"
 #import "SJDispatch.h"
+#import "SJTitleLabel.h"
 
 #pragma clang diagnostic pop
 
