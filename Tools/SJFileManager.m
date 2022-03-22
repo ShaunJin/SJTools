@@ -27,10 +27,7 @@
 #pragma mark- 文件相关
 /** 数据保存文件夹完整路径 */
 +(NSString *)holeDataPath{
-    static NSString *path = nil;
-    if (!path) {
-        path = [NSString stringWithFormat:@"%@/%@",[self documentPath],[self dataPath]];
-    }
+    NSString *path = path = [NSString stringWithFormat:@"%@/%@",[self documentPath],[self dataPath]];
     [self createDirectoryIfNotExistAtPath:path];
     return path;
 }
