@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray *array;
 /** 页数 */
 @property(nonatomic,assign)NSInteger page;
-/** 是否显示缺省页 */
-@property(nonatomic,assign)BOOL showDefaultPage;
-/** 缺省页 */
-@property(nonatomic,strong)UIView *defaultPage;
 
 /** 刷新数据相关 */
 -(void)loadedDataWithArray:(NSArray *)array isLast:(BOOL)isLast;

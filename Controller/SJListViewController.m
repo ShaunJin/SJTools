@@ -36,7 +36,7 @@
         [self.scrollView.mj_footer endRefreshing];
     }
     [self.scrollView.mj_header endRefreshing];
-    self.showDefaultPage = (self.array.count == 0);
+    self.scrollView.defaultPage.hidden = !(self.array.count == 0);
     self.scrollView.mj_footer.hidden = (self.array.count < 3) ; // 2018.01.31 当数据条数小于3条时不显示footer
 }
 
@@ -46,7 +46,7 @@
     self.scrollView.mj_header.refreshingBlock = ^{
         weakSelf.page = 1;
         weakSelf.scrollView.mj_footer.hidden = YES;
-        weakSelf.showDefaultPage = NO;
+        weakSelf.scrollView.defaultPage.hidden = YES;
     };
 }
 -(void)addFooterAction:(SEL)action{
@@ -58,7 +58,7 @@
     [self addFooterAction:action];
 }
 -(void)beginLoadData{
-    self.showDefaultPage = NO;
+    self.scrollView.defaultPage.hidden = YES;
     [self.scrollView.mj_header beginRefreshing];
 }
 /** 结束加载 */
@@ -72,27 +72,13 @@
 #pragma mark- Setter
 -(void)setScrollView:(UIScrollView *)scrollView{
     if (_scrollView) {
-        [self.defaultPage removeFromSuperview];
         [_scrollView removeFromSuperview];
     }
     _scrollView = scrollView;
     [self.view addSubview:_scrollView];
-    [_scrollView addSubview:self.defaultPage];
-    self.defaultPage.sd_layout.spaceToSuperView(UIEdgeInsetsMake(0, 0, 0, 0));
     if ([self autoHeaderFooterAction]) {
         [self addHeaderAction:@selector(loadNewData)];
         [self addFooterAction:@selector(loadMoreData)];
-    }
-}
--(void)setShowDefaultPage:(BOOL)showDefaultPage{
-    _showDefaultPage = showDefaultPage;
-    self.scrollView.mj_footer.hidden = showDefaultPage;
-    self.defaultPage.hidden = !showDefaultPage;
-    if (_showDefaultPage) {
-        self.defaultPage.hidden = NO;
-        self.defaultPage.frame = CGRectMake(0, 0, self.scrollView.width, self.scrollView.height);
-    }else{
-        self.defaultPage.hidden = YES;
     }
 }
 #pragma mark- Getter
@@ -108,22 +94,7 @@
     }
     return _array;
 }
--(UIView *)defaultPage{
-    if (!_defaultPage) {
-        _defaultPage = [UIView new];
-        _defaultPage.backgroundColor = self.view.backgroundColor;
-        UIImageView *imageView = [UIImageView new];
-//        imageView.image = EBLoadImage(@"icon_no_data");
-        [_defaultPage addSubview:imageView];
-        UILabel *label = [UILabel labelWithTextColor:Color(141, 141, 141) size:14];
-        label.text = @"暂无数据";
-        [_defaultPage addSubview:label];
-        imageView.sd_layout.centerXEqualToView(_defaultPage).centerYEqualToView(_defaultPage).widthIs(182).heightIs(142);
-        label.sd_layout.centerXEqualToView(_defaultPage).topSpaceToView(imageView,-32).heightIs(14).widthIs(label.textWidth);
-        _defaultPage.hidden = YES;
-    }
-    return _defaultPage;
-}
+
 #pragma mark- LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
