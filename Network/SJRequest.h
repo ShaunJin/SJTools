@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, SJHttpMethod) {
     kHttpPost = 1,      // POST
     kHttpPut = 2,       // PUT
     kHttpDelete = 3,    // DELETE
+    kHttpUpload = 4,    // UPLOAD
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -39,6 +40,8 @@ typedef void (^SJSuccessBlock)(BOOL success);
 +(instancetype)httpGet:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
 /** post */
 +(instancetype)post:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
+/** 上传用 */
++(instancetype)upload:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
 -(instancetype)initWithUri:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock;
 -(BOOL)addValue:(id<NSCoding>)value forKey:(NSString *)key;
 -(void)go;

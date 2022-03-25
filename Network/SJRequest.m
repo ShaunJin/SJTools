@@ -51,6 +51,16 @@ static AFNetworkReachabilityStatus networkStatus = AFNetworkReachabilityStatusUn
         case kHttpDelete:{
             [self DELETE:url parameters:self.requestData headers:self.headers success:successBlock failure:failureBlock];
         }break;
+        case kHttpUpload:{
+            NSDictionary *parameters = self.requestData;
+            [self POST:url parameters:nil headers:self.headers constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                NSData *data = parameters[@"data"];
+                NSString *name = parameters[@"name"];
+                NSString *fileName = parameters[@"fileName"];
+                NSString *mimeType = parameters[@"mimeType"];
+                [formData appendPartWithFileData:data name:name fileName:fileName mimeType:mimeType];
+            } progress:self.progressBlock success:successBlock failure:failureBlock];
+        }break;
         // 默认为get
         default:{
             if (self.requestData.count > 0) {
@@ -141,7 +151,12 @@ static AFNetworkReachabilityStatus networkStatus = AFNetworkReachabilityStatusUn
     r.method = kHttpPost;
     return r;
 }
-
++(instancetype)upload:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock{
+    SJRequest *r = [self requestWithUri:uri completeBlock:completeBlock];
+    r.requestSerializer = [AFPropertyListRequestSerializer serializer];
+    r.method = kHttpUpload;
+    return r;
+}
 -(instancetype)initWithUri:(NSString *)uri completeBlock:(nullable SJCompleteBlock)completeBlock{
     if (self = [super init]) {
         self.uri = uri;
