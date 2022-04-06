@@ -15,7 +15,7 @@
 @implementation SJTabBarController
 #pragma mark- UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-//    self.title = viewController.title;
+    self.title = viewController.title;
 //    if ([self.navigationController isKindOfClass:[SJNavigationController class]]) {
 //        SJNavigationController *navi = (SJNavigationController *)self.navigationController;
 //        [navi changePreferenceWithViewController:viewController];

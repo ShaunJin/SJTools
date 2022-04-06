@@ -11,6 +11,7 @@
 static char *defaultPageChar = "defaultPage";
 @implementation UIScrollView (SJScrollView)
 -(void)setDefaultPage:(UIView *)defaultPage{
+    [self addSubview:defaultPage];
     objc_setAssociatedObject(self, &defaultPageChar, defaultPage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 -(UIView *)defaultPage{
@@ -29,7 +30,6 @@ static char *defaultPageChar = "defaultPage";
         CGFloat width = 85;
         CGFloat height = 94;
         _defaultPage.frame = CGRectMake((self.width - width) / 2, (self.height - height) / 2,  width, height);
-//        _defaultPage.sd_layout.centerXEqualToView(self).centerYEqualToView(self).widthIs(width).heightIs(height);
         _defaultPage.hidden = YES;
         objc_setAssociatedObject(self, &defaultPageChar, _defaultPage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }

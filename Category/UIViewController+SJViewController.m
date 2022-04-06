@@ -21,6 +21,7 @@
 -(void)customViewWillAppear:(BOOL)animated{
     [self customViewWillAppear:animated];
     if (self.navigationController) {
+//        NSLog(@"customViewWillAppear");
         if ([self isKindOfClass:[SJBaseViewController class]]) {
             SJBaseViewController *vc = (SJBaseViewController *)self;
             BOOL isClearNavigationBar = [vc isClearNavigationBar];
@@ -29,6 +30,7 @@
                 NSForegroundColorAttributeName: [vc navigationTitleColor],
                 NSFontAttributeName: [vc navigationTitleFont],
             };
+//            NSLog(@"attr = %@",attr);
             vc.navigationController.navigationBarHidden = [vc hiddenNavigationBar];
             if (@available(iOS 15.0, *)) {
                 if (isClearNavigationBar) {
