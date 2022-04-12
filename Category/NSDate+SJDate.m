@@ -10,7 +10,7 @@
 
 @implementation NSDate (SJDate)
 /** 根据时间戳获取字符串 */
-+(NSString *)stringWithTimeInterval:(NSTimeInterval)timeInterval useDateFormatter:(NSString *)formatter{
++(NSString *)stringWithTimeInterval:(NSTimeInterval)timeInterval useDateFormatter:(nullable NSString *)formatter{
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     if (formatter) {
         dateFormatter.dateFormat = formatter;
@@ -21,7 +21,7 @@
     return [dateFormatter stringFromDate:date];
 }
 /** 获取当前时间 */
-+(NSString *)currentTimeStringWithDateFormatter:(NSString *)formatter{
++(NSString *)currentTimeStringWithDateFormatter:(nullable NSString *)formatter{
     return [self stringWithTimeInterval:[NSDate date].timeIntervalSince1970 useDateFormatter:formatter];
 }
 /** 将字符串转换成NSDate(需提供格式) */

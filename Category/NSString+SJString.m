@@ -183,6 +183,9 @@ NSString * kAutoComplete(NSString *text, NSString *complete){
  @return 过滤后的文字
  */
 +(NSString *)filterHTML:(NSString *)html{
+    if (![html isKindOfClass:[NSString class]]) {
+        return html;
+    }
     NSScanner * scanner = [NSScanner scannerWithString:html];
     NSString * text = nil;
     while([scanner isAtEnd]==NO){
