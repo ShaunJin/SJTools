@@ -62,6 +62,8 @@ NSString * kAutoComplete(NSString *text, NSString *complete);
 +(NSString *)filterHTML:(NSString *)html;
 /** 根据url组装出参数字典（url中？后边的内容） */
 -(NSDictionary *)getParams;
+/** 获取参数字符串 */
+-(NSString *)getParamsString;
 /** 获取host name(一个url中:到？之间的内容) */
 -(NSString *)getHostName;
 /** 获取协议名(一个url中:前边的内容) */

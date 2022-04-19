@@ -230,19 +230,23 @@ NSString * kAutoComplete(NSString *text, NSString *complete){
 /** 根据url组装出参数字典 */
 -(NSDictionary *)getParams{
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    NSRange range = [self rangeOfString:@"?"];
-    if (range.location != NSNotFound) {
-        NSString *queryStr = [self substringFromIndex:range.location + 1];
-        NSArray *queryArr = [queryStr componentsSeparatedByString:@"&"];
-        for (NSString *query in queryArr) {
-            NSArray *arr = [query componentsSeparatedByString:@"="];
-            if (arr.count == 2) {
-                dict[arr[0]] = dict[arr[1]];
-                [dict setObject:arr[1] forKey:arr[0]];
-            }
+    NSArray *queryArr = [[self getParamsString] componentsSeparatedByString:@"&"];
+    for (NSString *query in queryArr) {
+        NSArray *arr = [query componentsSeparatedByString:@"="];
+        if (arr.count == 2) {
+            dict[arr[0]] = dict[arr[1]];
+            [dict setObject:arr[1] forKey:arr[0]];
         }
     }
     return [dict copy];
+}
+/** 获取参数字符串 */
+-(NSString *)getParamsString{
+    NSRange range = [self rangeOfString:@"?"];
+    if (range.location != NSNotFound) {
+        return [self substringFromIndex:range.location + 1];
+    }
+    return @"";
 }
 /** 获取host name(一个url中:到？或/之间的内容) */
 -(NSString *)getHostName{

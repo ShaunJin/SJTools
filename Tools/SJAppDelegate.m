@@ -24,11 +24,10 @@ static SJAppDelegate *app;
             id obj = [class new];
             if ([obj isKindOfClass:[UIViewController class]]) {
                 UIViewController *vc = (UIViewController *)obj;
-                NSArray *propertys = [class getPropertyList];
-                for (NSString *key in params) {
+                for (NSString *key in [params allKeys]) {
                     if ([key isEqualToString:@"title"]) {
                         vc.title = params[key];
-                    }else if ([propertys containsObject:key]) {
+                    }else{
                         [vc setValue:params[key] forKey:key];
                     }
                 }

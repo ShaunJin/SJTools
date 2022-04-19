@@ -67,4 +67,49 @@
     free(propertyList);
     return [propertyArray copy];
 }
+#pragma mark- setValue:forKey:崩溃防护
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self kvc_exchangeSelector:@selector(setValue:forKey:) toSelector:@selector(kvc_setValue:forKey:)];
+        [self kvc_exchangeSelector:@selector(valueForKey:) toSelector:@selector(kvc_valueForKey:)];
+    });
+}
+
++ (void)kvc_exchangeSelector:(SEL)selector toSelector:(SEL)toSelector {
+    Method method = class_getInstanceMethod(self.class, selector);
+    Method toMethod = class_getInstanceMethod(self.class, toSelector);
+    method_exchangeImplementations(method, toMethod);
+}
+
+- (void)kvc_setValue:(id)value forKey:(NSString *)key {
+    if (key.length <= 0) {
+        NSLog(@"[%@ setValue:forKey:]: attempt to set a value for a nil key", self.class);
+        return;
+    }
+    
+    [self kvc_setValue:value forKey:key];
+}
+
+- (id)kvc_valueForKey:(NSString *)key {
+    if (key == nil) {
+        NSLog(@"[%@ valueForKey:]: attempt to retrieve a value for a nil key", self.class);
+        return nil;
+    }
+    
+    return [self kvc_valueForKey:key];
+}
+
+- (void)setNilValueForKey:(NSString *)key {
+    NSLog(@"[<%@ %p> setNilValueForKey]: could not set nil as the value for the key length.", self.class, self);
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    NSLog(@"[<%@ %p> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key %@.", self.class, self, key);
+}
+
+- (id)valueForUndefinedKey:(NSString *)key {
+    NSLog(@"[<%@ %p> valueForUndefinedKey:]: this class is not key value coding-compliant for the key: %@", self.class, self, key);
+    return nil;
+}
 @end
