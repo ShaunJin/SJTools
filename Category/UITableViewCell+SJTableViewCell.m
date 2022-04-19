@@ -6,7 +6,7 @@
 //
 
 #import "UITableViewCell+SJTableViewCell.h"
-
+#import <objc/runtime.h>
 @implementation UITableViewCell (SJTableViewCell)
 +(void)load{
     Method exchangeMethod = class_getInstanceMethod(self, @selector(initWithStyle:reuseIdentifier:));
