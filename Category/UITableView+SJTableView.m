@@ -25,9 +25,9 @@
     [self customInitWithFrame:frame style:style];
     if (@available(iOS 15.0, *)) {
         self.sectionHeaderTopPadding = 0.0f;
-        self.backgroundColor = [UIColor whiteColor];
-        [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     }
+    self.backgroundColor = [UIColor whiteColor];
+    [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     return self;
 }
 @end
